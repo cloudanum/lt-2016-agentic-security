@@ -1,0 +1,19 @@
+# Datasets — large, not code (kept locally, fetched separately)
+data/
+
+# Secrets — never commit
+*.env
+.env
+*key*.txt
+keys/
+
+# Jupyter runtime / build artifacts
+.jupyter-lab.log
+.jupyter-lab.lock
+.ipynb_checkpoints/
+.virtual_documents/
+__pycache__/
+*.py[cod]
+
+# OS / editor
+.DS_Store
