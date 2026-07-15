@@ -10,7 +10,6 @@ quiz**.
 
 - `code/Ch01-Lab.ipynb … Ch07-Lab.ipynb` — the lab notebooks (details in
   [`code/README.md`](code/README.md))
-- `code/make_notebooks.py` — the generator that builds them
 - `start-jupyter.sh` — launches JupyterLab for this course (port 8889)
 
 ## Running
