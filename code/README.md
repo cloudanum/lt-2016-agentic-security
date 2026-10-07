@@ -25,7 +25,10 @@ top-to-bottom with nothing else present.
    plain-language explanation, and its code in its own cell. Most carry a short
    **Security lens** note, and several add a **real-world case-study** callout
    (Bing "Sydney", the Arup deepfake, Air Canada, torchtriton, and more).
-7. **Try it** — a runnable, self-contained demo with live output.
+7. **Try it** — a runnable, self-contained demo with live output. Ch01 adds a
+   second demo that runs the Isolation Forest baseline on the real CICIDS-2017
+   sample (`../data/CICIDS-2017.csv`); with no data file it prints how to build
+   it and moves on.
 8. **Live demo** (Ch01, Ch03, Ch04, Ch05) — the wired key drives a real
    language-model example (a reasoner in the agent loop, a sandbox red-team, LLM
    triage, and an LLM extractor). Guarded — with no key it prints `skipped`.
@@ -43,7 +46,8 @@ jupyter lab                       # open any Ch0N-Lab.ipynb and Run All
 jupyter nbconvert --to notebook --execute --inplace Ch05-Lab.ipynb
 ```
 
-All seven execute cleanly on **numpy + scikit-learn** alone. Heavier libraries
+All seven execute cleanly on **numpy + scikit-learn** (Ch01's data demo also
+uses **pandas**). Heavier libraries
 (`torch`, `kafka`, `presidio`, `OTXv2`, `art`) are imported lazily inside the
 functions that use them, so every function *defines* with nothing installed.
 Chapters 6 and 7 are pure standard library.

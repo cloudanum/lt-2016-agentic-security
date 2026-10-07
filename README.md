@@ -10,6 +10,7 @@ quiz**.
 
 - `code/Ch01-Lab.ipynb … Ch07-Lab.ipynb` — the lab notebooks (details in
   [`code/README.md`](code/README.md))
+- `fetch_data.py` — builds the CICIDS-2017 sample used by Ch01 (see below)
 - `start-jupyter.sh` — launches JupyterLab for this course (port 8889)
 
 ## Running
@@ -23,4 +24,15 @@ Or open any `code/Ch0N-Lab.ipynb` and **Run All**. They run on
 call a language model read an OpenAI key from `/home/student/keys/key.txt` at
 runtime — the key is **never printed or stored** in the notebooks.
 
-Datasets live under `data/` (git-ignored — large, fetched separately).
+Datasets live under `data/` (git-ignored — large, fetched separately). Ch01's
+anomaly-detection demo reads `data/CICIDS-2017.csv`, a 100k-flow sample of the
+[CIC-IDS2017 dataset](https://www.unb.ca/cic/datasets/ids-2017.html). Build it
+once before class:
+
+```bash
+python3 fetch_data.py          # downloads ~224 MB and writes the sample
+python3 fetch_data.py --mock   # offline: same schema, synthetic flows
+```
+
+If the download fails the script falls back to the synthetic file
+automatically, so the notebook always has data.
