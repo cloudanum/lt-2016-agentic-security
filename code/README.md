@@ -29,9 +29,10 @@ top-to-bottom with nothing else present.
    second demo that runs the Isolation Forest baseline on the real CICIDS-2017
    sample (`CICIDS-2017.csv`, shipped in this folder); with no data file it
    prints how to rebuild it and moves on.
-8. **Live demo** (Ch01, Ch03, Ch04, Ch05) — the wired key drives a real
-   language-model example (a reasoner in the agent loop, a sandbox red-team, LLM
-   triage, and an LLM extractor). Guarded — with no key it prints `skipped`.
+8. **Live demo** (Ch01, Ch02, Ch03, Ch04, Ch05) — the wired key drives a real
+   language-model example (a reasoner in the agent loop, a live RAG answer, a
+   sandbox red-team, LLM triage, and an LLM extractor). Guarded — with no key
+   it prints `skipped`.
 9. **Quiz** — multiple-choice questions plus an **auto-graded** code cell: fill in
    the `answers` dict (`"A"`, `"B"`, …) and run it to see your score, with the
    correct answer and a one-line explanation for anything you miss.
