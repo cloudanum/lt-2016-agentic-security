@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Build the CICIDS-2017 teaching sample used by code/Ch01-Lab.ipynb.
+"""Rebuild the CICIDS-2017 teaching sample shipped in code/CICIDS-2017.csv.
 
-Downloads the CICIDS-2017 MachineLearningCSV bundle (8 daily CSV files,
-~2.8M labelled flows), cleans it, and writes a stratified sample to
-``data/CICIDS-2017.csv``. If the download is unavailable (e.g. offline lab
-machines), a seeded synthetic file with the same schema is generated
-instead, so the notebook always has data to run on.
+The sample already ships with the repo (next to Ch01-Lab.ipynb) — run this
+only to regenerate it. It downloads the CICIDS-2017 MachineLearningCSV
+bundle (8 daily CSV files, ~2.8M labelled flows), cleans it, and writes a
+stratified sample to ``code/CICIDS-2017.csv``. If the download is
+unavailable (e.g. offline lab machines), a seeded synthetic file with the
+same schema is generated instead, so the notebook always has data to run on.
 
 Full dataset (official source):
     https://www.unb.ca/cic/datasets/ids-2017.html
@@ -34,7 +35,7 @@ ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
 ZIP_PATH = DATA_DIR / "MachineLearningCSV.zip"
-OUT_PATH = DATA_DIR / "CICIDS-2017.csv"
+OUT_PATH = ROOT / "code" / "CICIDS-2017.csv"  # ships in the repo, next to Ch01
 
 MIRROR_URL = (
     "https://huggingface.co/datasets/bencorn/CICIDS2017"

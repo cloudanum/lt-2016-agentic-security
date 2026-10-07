@@ -27,8 +27,8 @@ top-to-bottom with nothing else present.
    (Bing "Sydney", the Arup deepfake, Air Canada, torchtriton, and more).
 7. **Try it** — a runnable, self-contained demo with live output. Ch01 adds a
    second demo that runs the Isolation Forest baseline on the real CICIDS-2017
-   sample (`../data/CICIDS-2017.csv`); with no data file it prints how to build
-   it and moves on.
+   sample (`CICIDS-2017.csv`, shipped in this folder); with no data file it
+   prints how to rebuild it and moves on.
 8. **Live demo** (Ch01, Ch03, Ch04, Ch05) — the wired key drives a real
    language-model example (a reasoner in the agent loop, a sandbox red-team, LLM
    triage, and an LLM extractor). Guarded — with no key it prints `skipped`.

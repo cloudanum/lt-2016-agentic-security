@@ -24,15 +24,16 @@ Or open any `code/Ch0N-Lab.ipynb` and **Run All**. They run on
 call a language model read an OpenAI key from `/home/student/keys/key.txt` at
 runtime — the key is **never printed or stored** in the notebooks.
 
-Datasets live under `data/` (git-ignored — large, fetched separately). Ch01's
-anomaly-detection demo reads `data/CICIDS-2017.csv`, a 100k-flow sample of the
-[CIC-IDS2017 dataset](https://www.unb.ca/cic/datasets/ids-2017.html). Build it
-once before class:
+Ch01's anomaly-detection demo reads `code/CICIDS-2017.csv` — a 100k-flow
+sample of the [CIC-IDS2017 dataset](https://www.unb.ca/cic/datasets/ids-2017.html)
+that **ships in the repo**, so a plain clone has everything the labs need.
+Rebuilding it is only needed to change the sample:
 
 ```bash
-python3 fetch_data.py          # downloads ~224 MB and writes the sample
+python3 fetch_data.py          # downloads ~224 MB and rewrites the sample
 python3 fetch_data.py --mock   # offline: same schema, synthetic flows
 ```
 
 If the download fails the script falls back to the synthetic file
-automatically, so the notebook always has data.
+automatically, so the notebook always has data. Download intermediates live
+under `data/` (git-ignored).
