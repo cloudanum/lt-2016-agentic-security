@@ -1,41 +1,48 @@
 import json, glob, datetime, re
 
-TODAY = "2026-10-08"
+TODAY = datetime.date.today().isoformat()
 OUT_DIR = "results"
 
 HIGHLIGHTS = {
     "Ch01": [
-        "Isolation Forest on the shipped 103k-flow CICIDS-2017 sample: 1,030 outliers (1%); rare attacks (slowloris, Infiltration, Heartbleed) surface among unusual-but-benign flows.",
-        "The cognitive loop triages the detector's real top-scored flow (score 0.736), enriches via CVE lookup, escalates on CVSS 10.0 — every tool call in the Zero Trust action log.",
-        "Live LLM reasoner chose an action inside the perceive-interpret-reason-act-learn loop.",
+        "Isolation Forest on the 103k-flow CICIDS-2017 sample: lift 0.50x (high-volume DDoS/PortScan look normal) yet 11/11 Heartbleed and 13/36 Infiltration flagged.",
+        "Supervised random forest: 0.994 F1 on seen attacks, 0% recall on held-out Bot / FTP-Patator / Infiltration.",
+        "Benign-trained autoencoder: top-1% is 90% real attacks vs 11% for the forest; the two agree on only ~30 flows.",
+        "Schema-enforcing ToolRegistry denies 4 hijacked calls (unregistered tool, argument smuggling, extra arg, wrong type) and logs all 5.",
     ],
     "Ch02": [
-        "Full RAG pipeline over the 12-doc threat-intel KB: ransomware question retrieves playbook + ATT&CK T1490 chunks (0.23/0.19) and composes a cited answer; out-of-KB question is refused (0.00 < 0.15).",
-        "Extraction probe dumps all 22 chunks including the internal incident note — retrieval has no notion of 'authorized to see'.",
-        "Live LLM answered the same augmented prompt (compare with the deterministic composer).",
+        "RAG over the 12-doc KB answers the ransomware question with citations and refuses the out-of-KB question (0.00 < 0.15).",
+        "Extraction probe dumps all 22 chunks incl. the IR-only note; a planted wiki page wins retrieval (0.62) and advises paying the ransom.",
+        "secure_rag_query refuses the probe, ACL-denies the IR note to analysts, drops the unapproved source; ingestion-time filtering restores the correct answer.",
+        "Cost-based threshold (miss = 250x false alarm): 0 misses vs 37 at the max-F1 threshold; risk register + 3x3 matrix.",
     ],
     "Ch03": [
-        "Guard with a real char n-gram TF-IDF embedder: 4 of 5 injection payloads blocked (cos 0.36-0.75); refusal-suppression evades (0.08) — necessary, not sufficient.",
-        "FGSM in closed form collapses a trained guardrail classifier: 0.95 -> 0.31 accuracy as eps grows 0.05 -> 0.5.",
-        "Live red-team: sandbox TranslateBot attacked with 5 payloads + DAN; safe_ask screens them with OpenAI embeddings.",
+        "Recorded gpt-4o-mini replies: 3 of 5 injection variants hijack the sandbox (60%), reported as MITRE ATLAS findings.",
+        "Local input guard blocks 4/5; a door-sign false positive shows the precision cost of signatures.",
+        "Output guard (canary + task-length contract) independently blocks all 3 hijacks (and the refusal): the two layers overlap.",
+        "FGSM: 0.95 -> 0.31 accuracy at eps 0.5; adversarial training lifts eps 0.3 from 0.60 to 0.66. Callback rule holds an Arup-style deepfake that scores 0.",
     ],
     "Ch04": [
-        "Label-flip poisoning dose-response: +0.009 F1 drop at 5%, +0.079 at 20%; surrogate model extraction reaches 88.3% agreement.",
-        "triage_dump offline rule triage flags svch0st.exe lookalike + RWX region -> HIGH; live run triages the same artifacts with the LLM.",
-        "Slopsquat audit flags invented packages; payload splitting assembles a passphrase across turns that each pass the filter — live replay shows the model completing it.",
+        "At 10% of rows flipped, targeted 1->0 poisoning drops malicious recall 0.84 -> 0.70 (random: no drop); kNN label check finds 82% of flips, sanitized recall 0.79.",
+        "Extraction agreement 69% at 25 queries -> 93% at 6,400; a 25-query budget blocks the 6,400-query attack.",
+        "Constant-time padding flattens the latency side channel (0.18/0.73/1.49 ms -> 4.0/4.0/4.0 ms); session moderator blocks payload splitting at turn 2.",
+        "Import audit: 'cvelookup' has no PyPI project (hallucinated); 'nmap' resolves to python-nmap.",
     ],
     "Ch05": [
-        "PCA reconstruction scorer drives the PEV pipeline with real calibrated scores: attack 0.99 -> quarantine; benign 0.15 -> monitor; irreversible action without approval -> rolled back.",
-        "Executor enriches through its tool belt (VT mock + bundled CVE mini-DB: Log4Shell 10.0); audit trail replays over LocalBus; HMAC-signed event chain verifies intact.",
-        "Live LLM entity extractor parses the alert into host/severity/ioc JSON.",
+        "PEV on calibrated detector scores: attack 0.99 -> quarantine, benign 0.15 -> monitor; approval queue records who approved the wipe.",
+        "Bus-driven triage: alerts topic -> PEV -> decisions topic, replayable in order.",
+        "validate_ticket rejects incomplete regex tickets and a hostile model output before they reach the Planner.",
+        "verify_chain recomputes HMACs: catches an edit, a keyless forgery, and a middle deletion; tail truncation is shown as the residual gap.",
     ],
     "Ch06": [
-        "Governance assistant: score 66/100 with 1 open critical; Zero Trust go-live BLOCKED (executor-agent has no signed audit trail).",
-        "Remediation plan leads with the audit-trail CRITICAL from both lenses (ZT finding + MAN-1 control).",
+        "EU AI Act tiers: SOC agent minimal, support bot limited, CV screening high, workplace emotion recognition prohibited.",
+        "Score 66/100 with 1 open critical; Zero Trust go-live BLOCKED (executor-agent has no signed audit trail). RACI validator finds a policy row with nobody Responsible.",
+        "Determinism sandwich stops an injection at input and a hijacked delete_snapshots call at output; every decision HMAC-signed.",
+        "PQC inventory: ECDH mTLS = MIGRATE NOW (harvest-now-decrypt-later), AES-128 = UPGRADE, RSA-2048 signing = PLAN.",
     ],
     "Ch07": [
-        "Maturity self-assessment: 1/4 (Initial), 48% — governance gate caps the team at 'Initial'.",
-        "Weakest domain: post-quantum readiness (Absent) -> crypto inventory + crypto-agility next step.",
+        "Maturity 1/4 (Initial), 48% — governance gate caps the team.",
+        "What-if: only governance +1 moves the level; 90-day roadmap = governance, post-quantum, governance -> projected 3/4.",
     ],
 }
 
@@ -58,11 +65,13 @@ for f in sorted(glob.glob("code/Ch0*-Lab.ipynb")):
     chap = f.split("/")[-1][:4]
     nb = json.load(open(f))
     title = "".join(nb["cells"][0]["source"]).lstrip("# ").strip()
+    live = "skipped (no API key)" not in json.dumps(nb)
+    mode = ("with a live OpenAI key (gpt-4o-mini / text-embedding-3-small)" if live else
+            "offline (no API key) — live-LLM cells print `skipped`; Ch03 uses recorded gpt-4o-mini replies")
     lines = [
         f"# {title} — lab run results",
         "",
-        f"_Executed end-to-end on {TODAY} with a live OpenAI key "
-        "(gpt-4o-mini / text-embedding-3-small); zero cell errors._",
+        f"_Executed end-to-end on {TODAY} {mode}; zero cell errors._",
         "",
         "## Result highlights",
         "",

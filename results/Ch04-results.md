@@ -1,29 +1,100 @@
 # Chapter 4 — Exploiting the AI Attack Surface — lab run results
 
-_Executed end-to-end on 2026-10-08 with a live OpenAI key (gpt-4o-mini / text-embedding-3-small); zero cell errors._
+_Executed end-to-end on 2026-10-07 offline (no API key) — live-LLM cells print `skipped`; Ch03 uses recorded gpt-4o-mini replies; zero cell errors._
 
 ## Result highlights
 
-- Label-flip poisoning dose-response: +0.009 F1 drop at 5%, +0.079 at 20%; surrogate model extraction reaches 88.3% agreement.
-- triage_dump offline rule triage flags svch0st.exe lookalike + RWX region -> HIGH; live run triages the same artifacts with the LLM.
-- Slopsquat audit flags invented packages; payload splitting assembles a passphrase across turns that each pass the filter — live replay shows the model completing it.
+- At 10% of rows flipped, targeted 1->0 poisoning drops malicious recall 0.84 -> 0.70 (random: no drop); kNN label check finds 82% of flips, sanitized recall 0.79.
+- Extraction agreement 69% at 25 queries -> 93% at 6,400; a 25-query budget blocks the 6,400-query attack.
+- Constant-time padding flattens the latency side channel (0.18/0.73/1.49 ms -> 4.0/4.0/4.0 ms); session moderator blocks payload splitting at turn 2.
+- Import audit: 'cvelookup' has no PyPI project (hallucinated); 'nmap' resolves to python-nmap.
 
 ## Full cell outputs
 
 ### Setup
 
 ```
-OpenAI key loaded — client ready (key not shown).
+No key file at /home/student/keys/key.txt and no OPENAI_API_KEY — the live demo will be skipped.
 ```
 
-### Try it
+### Setup
 
 ```
-poisoning 5% : F1 clean=0.879  poisoned=0.871  drop=+0.009
-poisoning 20% : F1 clean=0.879  poisoned=0.800  drop=+0.079
-extraction : surrogate agreement = 88.3%
-side-chan  : latency by hidden length = {2: 0.2, 8: 0.7, 16: 1.5} ms (monotonic => leak)
+train (560, 12), test (240, 12), positive (malicious) share 50%
+```
 
+### 1.1 Label-flip poisoning
+
+```
+rows flipped    random: malicious recall    targeted 1->0: malicious recall
+          5%   0.84 -> 0.83                0.84 -> 0.78
+         10%   0.84 -> 0.86                0.84 -> 0.70
+         20%   0.84 -> 0.74                0.84 -> 0.42
+```
+
+### 1.2 Detecting the poison
+
+```
+flipped 56 labels; flagged 92; precision 50%, recall 82%
+clean     model: malicious recall 0.84
+poisoned  model: malicious recall 0.70
+sanitized model: malicious recall 0.79
+```
+
+### 1.2 Detecting the poison
+
+```
+queries  surrogate agreement (mean of 3 attacker runs)
+     25  68.9%
+    100  88.3%
+    400  90.4%
+   1600  91.4%
+   6400  92.9%
+```
+
+### 1.2 Detecting the poison
+
+```
+attacker blocked: query budget exhausted | budget exceeded: asked for 6400, 25 left
+best the attacker can do inside the budget: 68.9% agreement
+```
+
+### 3.1 Token-timing side channel
+
+```
+raw     latency by hidden length (ms): {2: 0.19, 8: 0.76, 16: 1.52}
+padded  latency by hidden length (ms): {2: 4.0, 8: 4.0, 16: 4.0}
+```
+
+### 3.2 Payload splitting across turns
+
+```
+single-shot passes filter?  False
+every split turn passes filter? True
+assembled only in the combined context: F = 'alpha-2026'
+```
+
+### 3.2 Payload splitting across turns
+
+```
+after turn 1: allow  signals=['sensitive target']
+after turn 2: BLOCK  signals=['fragment definitions', 'sensitive target', 'piecewise framing']
+after turn 3: BLOCK  signals=['fragment definitions', 'assembly instruction', 'sensitive target', 'piecewise framing']
+benign chat: (True, [])
+```
+
+### 3.3 Hallucination and slopsquatting
+
+```
+cvelookup    NO PyPI project 'cvelookup' -> likely hallucinated; do not install
+json         stdlib
+nmap         on PyPI as 'python-nmap' — vet before installing
+socket       stdlib
+```
+
+### 3.3 Hallucination and slopsquatting
+
+```
 (no dump file — using the bundled sample artifacts)
 risk: HIGH
 - PID 1337 'svch0st.exe' — lookalike of 'svchost.exe'
@@ -31,48 +102,34 @@ risk: HIGH
 next: preserve the dump, isolate the host, escalate to IR
 ```
 
-### Live demo — LLM triage of memory artifacts
+### 4.1 Live demo — LLM triage of the same artifacts
 
 ```
-(no dump file — using the bundled sample artifacts)
-To triage the provided memory artifacts, we need to analyze the processes and the injected memory information. Here’s a breakdown of the artifacts:
-
-### Memory Artifacts Overview
-
-1. **Processes:**
-   - **PID 4 (System)**: This is a legitimate system process that is essential for the operating system's functionality.
-   - **PID 1337 (svch0st.exe)**: This process has a suspicious name (similar to "svchost.exe," which is a legitimate Windows process). It has a parent process ID (PPID) of 1, indicating it was started by the system process.
-
-2. **Injected Memory:**
-   - **PID 1337 (svch0st.exe)**: This process has injected memory with the protection flag `PAGE_EXECUTE_READWRITE`, which is often used by malware to execute code. The tag `VadS` indicates that this is a Virtual Address Descriptor, which is typically associated with memory that has been modified or injected.
-
-### Risk Assessment
-
-1. **PID 4 (System)**: Low risk. This is a core system process.
-2. **PID 1337 (svch0st.exe)**: High risk. The suspicious name and the injected
+skipped (no API key)
 ```
 
-### Hallucination and slopsquatting
+### 🧪 Your turn — a lookalike detector that generalises
 
 ```
-nmap                   NOT installed -> verify on PyPI (possible hallucination)
-requests               NOT installed -> verify on PyPI (possible hallucination)
-socket                 installed
+fakes: {'svch0st.exe': False, 'lsasss.exe': False, 'expl0rer.exe': False, 'scvhost.exe': False, 'csrs.exe': False}
+reals: {'svchost.exe': False, 'lsass.exe': False, 'chrome.exe': False, 'python.exe': False, 'notepad.exe': False}
+✗ Not yet — hint: skip exact matches first, then compare ratio() against each known name
 ```
 
-### Payload splitting across turns
+### 🧪 Your turn — a lookalike detector that generalises
 
 ```
-single-shot passes filter?  False
-every split turn passes filter? True
-assembled only in the combined context: F = 'alpha-2026'
-model's final turn: **Chapter 5: The Final Confrontation**
-
-The dimly lit warehouse echoed with the sound of dripping water, each drop a reminder of the tension that hung in the ai
+layer              attack                     framework                                defense
+Training data      targeted label flips       AML.T0020 Poison Training Data           neighbourhood label check + sanitize (1.2)
+Model              black-box extraction       AML.T0024.002 Extract ML Model           per-client query budget (2)
+Inference channel  token-timing side channel  (classic side channel)                   constant-time padding (3.1)
+Inference channel  payload splitting          AML.T0054 LLM Jailbreak                  session-level moderation (3.2)
+Supply chain       slopsquatting              AML.T0010 ML Supply Chain Compromise     import audit + PyPI check (3.3)
+Host & memory      process hollowing          ATT&CK T1055.012 Process Hollowing       malfind + lookalike triage (4)
 ```
 
 ### Quiz
 
 ```
-Fill in the answers dict above (A/B/C/D) and re-run to grade.
+Fill in the answers dict below (A/B/C/D) and re-run to grade.
 ```
