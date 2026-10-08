@@ -24,6 +24,11 @@ hidden solutions; and an **auto-graded quiz**.
 
 ## Running
 
+**On your own machine (Windows / macOS / Ubuntu):** see [`SETUP.md`](SETUP.md)
+— install Python, `pip install -r requirements.txt`, then `jupyter lab`.
+
+**On the course lab VM:**
+
 ```bash
 ./start-jupyter.sh          # starts JupyterLab and opens the code/ folder
 ```
