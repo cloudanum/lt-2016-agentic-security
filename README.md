@@ -10,6 +10,8 @@ quiz**.
 
 - `code/Ch01-Lab.ipynb … Ch07-Lab.ipynb` — the lab notebooks (details in
   [`code/README.md`](code/README.md))
+- `results/Ch0N-results.md` — recorded outputs from a full live-key run of
+  each notebook (regenerate with `gen_results.py`)
 - `fetch_data.py` — builds the CICIDS-2017 sample used by Ch01 (see below)
 - `start-jupyter.sh` — launches JupyterLab for this course (port 8889)
 
@@ -20,9 +22,10 @@ quiz**.
 ```
 
 Or open any `code/Ch0N-Lab.ipynb` and **Run All**. They run on
-**numpy + scikit-learn**; Chapters 6–7 are pure standard library. Notebooks that
-call a language model read an OpenAI key from `/home/student/keys/key.txt` at
-runtime — the key is **never printed or stored** in the notebooks.
+**numpy + scikit-learn**; Chapters 6–7 are pure standard library. Notebooks
+that call a language model read an OpenAI key from
+`/home/student/keys/key.txt`, or from `OPENAI_API_KEY` if it is already set —
+the key is **never printed or stored** in the notebooks.
 
 Ch01's anomaly-detection demo reads `code/CICIDS-2017.csv` — a 100k-flow
 sample of the [CIC-IDS2017 dataset](https://www.unb.ca/cic/datasets/ids-2017.html)
