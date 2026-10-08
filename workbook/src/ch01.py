@@ -14,54 +14,6 @@ def build():
 <ul class="facts"><li><b>Time</b> about 1 h 25 min</li><li><b>Data</b> CICIDS-2017 sample, 102,999 flows</li><li><b>Libraries</b> numpy, pandas, scikit-learn</li><li><b>API key</b> optional (Part 3 only)</li></ul>
 '''))
 
-    # ------------------------------------------------------------ do it now
-    P.append(("donow", "Do it now", donow(
-        1, "Agent or automation?",
-        "Individual",
-        "Class chat (or paper); no notebook",
-        "<code>SORT: D1-…, D2-…, D3-…, D4-…, D5-…, D6-… | EDGE: D# because ___</code>",
-        "Part 2 of the lab, where you build the cognitive loop (<code>perceive → interpret → reason → act → learn</code>) that makes D6 a real agent — and the gateway that keeps its decisions safe",
-        "Apply the perceive–decide–act test to six security systems. A system is an <b>agent</b> only if it perceives its input, <b>decides at run time</b> which action to take, and acts on that decision without a person approving each step. If the decision was made when someone wrote the rule, it is plain automation — no matter how smart it looks.",
-        "One chat line in the capture format below: a verdict (<code>agent</code> or <code>auto</code>) for each of D1–D6, plus a one-line reason for your edge case.",
-        [
-            "The six system descriptions below — the instructor posts them in chat or shows them on the opening slide. No notebook, no code.",
-            "Paper or a notes file for your sort, and the class chat for your capture line.",
-        ],
-        [
-            (1, "<b>Read</b> the six systems and the test.<br>"
-                "D1: a cron job emails the weekly incident report every Monday at 07:00.<br>"
-                "D2: a SIEM rule opens a ticket whenever an alert matches its pattern.<br>"
-                "D3: an LLM reads each alert, decides which response playbook fits, and runs it.<br>"
-                "D4: a chatbot answers FAQs from a fixed knowledge base.<br>"
-                "D5: a script blocks every IP on a fixed deny-list at the firewall.<br>"
-                "D6: an agent triages incoming alerts by choosing and calling detector tools."),
-            (2, "<b>Sort</b> each system: write <code>agent</code> or <code>auto</code> beside its ID. Decide by the loop, not by whether the words “AI” or “LLM” appear in the description."),
-            (1, "<b>Star</b> the ID you are least sure of and write one line naming the part of the loop that is present or missing (no run-time decide step, or it chooses the action itself)."),
-            (1, "<b>Post</b> your capture line in chat, in the exact format below, then compare sorts with a neighbor while others post."),
-        ],
-        "All six IDs have a verdict in chat, and your starred item carries a one-line reason that names a loop phase.",
-        [
-            ("Before class", "Paste the six descriptions and the capture format into chat, or put them on the opening slide. This runs before anyone opens the notebook — the slide alone is enough."),
-            ("Watch for", "D4 called an agent because it “uses AI”: it retrieves fixed answers and never decides what to do. And D2 or D5 called agents because they act on their own — ask who made the decision, and when. If the decision happened at rule-writing time, it is automation."),
-            ("Fallback", "No chat: read the six aloud, take a show of hands per ID, learners keep their sort on paper, and you reveal the key verbally."),
-        ],
-        "<i>Decide by the loop:</i> a system earns “agent” by choosing its action at run time, not by the technology inside it.",
-        "<i>Autonomy by label:</i> calling anything with an LLM — or anything that runs unattended — an agent, which inflates the attack surface you think you must defend and erases the one you actually have.",
-        [
-            ("https://genai.owasp.org/owasp-top-10-for-llm-applications/", "OWASP Top 10 for LLM Applications", "OWASP GenAI Security Project"),
-            ("https://atlas.mitre.org", "MITRE ATLAS: adversarial threats to AI systems", "MITRE"),
-            ("https://www.nist.gov/itl/ai-risk-management-framework", "NIST AI Risk Management Framework", "NIST"),
-        ],
-        "SORT: D1-auto, D2-auto, D3-agent, D4-auto, D5-auto, D6-agent\n"
-        "EDGE: D3 — the model chooses the playbook at run time; a hard-coded \"if alert type X then run playbook Y\" rule would be automation",
-        [
-            "Exactly D3 and D6 marked <code>agent</code>: both choose their action at run time. The other four execute a decision someone made when the schedule, rule, knowledge base, or list was written.",
-            "The test applied to the loop, not the label: D4 contains a language model yet is not an agent; D2 acts without a human yet is not an agent.",
-            "D2 as the most instructive wrong answer — unattended action is not autonomy; its decide step is the fixed rule.",
-            "A good EDGE line names the missing or present loop phase (“no run-time decide step”, “chooses the tool itself”), not just “it feels smart”.",
-        ],
-    )))
-
     # ------------------------------------------------------------ terms
     P.append(("terms", "Key terms", terms([
         ("AI agent", "A language model wrapped in a loop that lets it choose and run actions (tool calls) toward a goal, without a human approving each step."),

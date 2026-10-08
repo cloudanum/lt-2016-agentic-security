@@ -12,47 +12,6 @@ def build():
 <ul class="facts"><li><b>Time</b> about 1 h 5 min</li><li><b>Data</b> a sample team's scores, then yours</li><li><b>Libraries</b> standard library only</li><li><b>API key</b> not used</li></ul>
 '''))
 
-    P.append(("donow", "Do it now", donow(
-        7, "Score your own shop",
-        "Individual",
-        "Paper or course notes file; chat. No notebook, no code.",
-        "<code>SCORE: inv-# data-# adv-# def-# gov-# mon-# | FIRST: &lt;domain&gt; because &lt;reason&gt;</code>",
-        "Part 5 · Assess your own program — today's 0–2 quick score becomes your evidence-based 0–4 scoring in <code>MY_SCORES</code>, and your FIRST pick is tested against the what-if analysis in Part 3.",
-        "Give yourself an honest baseline on six agentic-security domains before the lab formalizes the scoring, and practice the question the capstone is built around: not where the biggest gap is, but which single fix moves you most.",
-        "One chat line with six 0–2 scores and one FIRST pick with a reason, plus the same line saved in your notes for Part 5.",
-        [
-            "Paper or your course notes file, open to a new heading <code>DN7 BASELINE</code>.",
-            "A target to score: your own team or organization, or the fictional org the instructor posts in chat.",
-            "The six-domain rubric (posted in chat): <b>inventory</b> (you can list every AI agent and what it can reach), <b>data controls</b> (what agents may read and send is bounded), <b>adversarial testing</b> (agents are probed before go-live), <b>layered defenses</b> (no single control failure is fatal), <b>governance</b> (an audit trail of agent actions exists), <b>monitoring</b> (agent behavior is logged and reviewed). Score each <b>0</b> = not in place, <b>1</b> = partial or ad hoc, <b>2</b> = in place and you can show the evidence.",
-        ],
-        [
-            (1, "<b>Pick your target.</b> Your own shop if you know it well enough; otherwise the fictional org in chat. Read the six domain lines once through."),
-            (2, "<b>Score all six domains</b> 0, 1, or 2, in the order given: inventory, data controls, adversarial testing, layered defenses, governance, monitoring. The honesty rule: if you cannot point to the artifact (the list, the test report, the log), score the level below."),
-            (1, "<b>Pick your FIRST:</b> the single domain where one step of improvement would most improve your posture. Write one line saying why — tied to risk or evidence, not to what would be easiest."),
-            (1, "<b>Post your line</b> in chat in the exact format, and copy it into your notes under <code>DN7 BASELINE</code>: <code>SCORE: inv-# data-# adv-# def-# gov-# mon-# | FIRST: &lt;domain&gt; because &lt;reason&gt;</code>."),
-        ],
-        "Your line is in chat with six scores and exactly one FIRST domain with a reason, and the same line is saved in your notes for Part 5.",
-        [
-            ("Before class", "Post the six domain lines and the 0/1/2 rubric in chat, plus a two-sentence fictional org for learners with nothing real to score, for example: <i>Acme Analytics, 200 staff, two LLM copilots in production, no one owns AI security.</i> Nothing else to stage — this runs before any notebook is opened."),
-            ("Watch for", "Straight 2s justified with <i>we have a policy</i> — ask what artifact proves it. Also watch for FIRST chosen because it is the cheapest fix, and for learners who reflexively pick their lowest score: the lab's whole point (Part 3) is that the weakest domain and the highest-leverage step are different questions. Note those names."),
-            ("Fallback", "No chat: draw six columns on the whiteboard (INV DATA ADV DEF GOV MON) and have learners post initials under each score, then read three FIRST picks aloud. No shared board either: collect the lines on paper and read two."),
-        ],
-        "<i>Evidence or it didn't happen:</i> a score you cannot back with an artifact is a wish, so score the level below.",
-        "<i>Policy theater:</i> scoring 2 because a document exists that nobody follows — the same inflation the governance gate punishes in the lab.",
-        [
-            ("https://genai.owasp.org/", "OWASP GenAI Security Project", "OWASP"),
-            ("https://www.nist.gov/itl/ai-risk-management-framework", "NIST AI Risk Management Framework", "NIST"),
-            ("https://atlas.mitre.org/", "MITRE ATLAS", "MITRE"),
-        ],
-        """SCORE: inv-1 data-1 adv-0 def-2 gov-1 mon-1 | FIRST: adv because both copilots went live with no prompt-injection testing and every other control assumes they behave""",
-        [
-            "Six scores in the stated order, each 0–2, and a FIRST line naming exactly one domain with a reason tied to risk or evidence — not to convenience.",
-            "Honest 0s are a strong answer: a named 0 with a gap beats an unevidenced 2 every time.",
-            "The instructive wrong answer is all 2s backed by <i>we have a policy</i>: ask which artifact proves it (the inventory list, the test report, the audit log).",
-            "Second instructive wrong answer: FIRST equals the lowest score by reflex. Hold that thought — Part 3's what-if analysis shows the gate (governance ≤ 1) can outrank the weakest domain.",
-        ],
-    )))
-
     P.append(("terms", "Key terms", terms([
         ("Maturity level", "0 Absent, 1 Initial, 2 Developing, 3 Managed, 4 Optimized."),
         ("Rubric", "What each level means in evidence: from <em>nothing in place</em> to <em>automated and continuously improved</em>. If you cannot show the evidence, score the level below."),

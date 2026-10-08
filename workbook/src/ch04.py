@@ -12,51 +12,6 @@ def build():
 <ul class="facts"><li><b>Time</b> about 1 h 40 min</li><li><b>Data</b> synthetic 12-feature classifier data · sample memory artifacts</li><li><b>Libraries</b> numpy, scikit-learn</li><li><b>API key</b> optional (LLM triage and import audit)</li></ul>
 '''))
 
-    P.append(("donow", "Do it now", donow(4, "Name the surface",
-        "Individual",
-        "Paper or the chat window; the sketch on the board",
-        "Chat line: <code>S1-data: ... | S2-model: ... | S3-channel: ... | S4-host: ...</code>",
-        "Parts 1–4 of this lab: each surface you label becomes one attack lane you run and then defend, and the four lanes close in the kill-chain table",
-        "Take a simple sketched LLM application and mark the four places an attacker can touch it, with one attack idea for each. This is threat modelling in miniature: start from where the attacker can reach, not from the defenses you happen to have.",
-        "One chat line naming all four surfaces and one attack per surface, in the exact capture format below.",
-        [
-            "The sketch, drawn on the board or posted in chat: <code>user → API → model → tools</code>, a <b>training-data store</b> feeding the model, and everything running on a <b>host VM</b>.",
-            "Paper and a pen, or just the chat window.",
-        ],
-        [
-            (1, "<b>Copy</b> the sketch: user → API → model → tools across the top, the training-data store feeding the model, and a box underneath labelled <i>host VM</i> that holds all of it."),
-            (1, "<b>Label</b> the four surfaces an attacker can touch, using the lab's names: <code>S1</code> training data, <code>S2</code> the model, <code>S3</code> the inference channel (the request path user → API → model → tools), <code>S4</code> the host."),
-            (2, "<b>Attack</b>: next to each label, write one attack idea as a short attacker action — not a defense, not a worry. Example shape: <i>flip training labels so the model waves malware through</i>."),
-            (1, "<b>Post</b> your capture line in chat: <code>S1-data: &lt;attack&gt; | S2-model: &lt;attack&gt; | S3-channel: &lt;attack&gt; | S4-host: &lt;attack&gt;</code>"),
-        ],
-        "All four surfaces are labelled on your sketch, each carries one attack idea phrased as something the attacker <i>does</i>, and your line is in chat.",
-        [
-            ("Before class", "Draw the sketch on the board before learners arrive and paste the ASCII version plus the capture-line template into chat, so nobody retypes it. The lab has not been opened yet — that is the point."),
-            ("Watch for", "Four variations of prompt injection, one per surface. It is the only AI attack most learners can name, so everything lands on the channel. Ask: what can an attacker do <i>before any user sends a prompt</i> (training data), and what does the model physically run on (host)? Also watch for “steal the API key” filed under the model — that is a credential problem; ask where the key lives."),
-            ("Fallback", "No board or a remote room: post the ASCII sketch in chat and have learners reply with their labelled copy and capture line. Same five minutes, same deliverable."),
-        ],
-        "<i>Attack the diagram first:</i> a threat model starts from where the attacker can touch the system, and the lab then works one layer at a time down exactly those surfaces.",
-        "<i>One-surface thinking:</i> treating “AI security” as prompt injection and leaving the training data and the host unguarded — the two surfaces this lab shows are quiet and cheap to attack.",
-        [
-            ("https://atlas.mitre.org/", "MITRE ATLAS", "MITRE"),
-            ("https://owasp.org/www-project-top-10-for-large-language-model-applications/", "OWASP Top 10 for LLM Applications", "OWASP"),
-            ("https://www.nist.gov/itl/ai-risk-management-framework", "NIST AI Risk Management Framework", "NIST"),
-        ],
-        """Sketch: user -> API -> model -> tools
-        training-data store -> model (training)
-        all of it inside the host VM
-
-S1-data: flip labels so the model learns to wave malware through (poisoning)
-S2-model: query the prediction API thousands of times and train a copy (extraction)
-S3-channel: split a blocked request across turns so no single message trips the filter
-S4-host: hollow a legitimate process on the VM and run the implant in memory only""",
-        [
-            "Four surfaces at four distinct layers: the data <i>before</i> training, the model itself, the request path every user shares, and the machine it all runs on.",
-            "Attack ideas phrased as attacker actions (<i>flip labels</i>, <i>train a surrogate</i>, <i>split the payload</i>), not defenses or vague worries like “hack the AI”.",
-            "The instructive wrong answer is prompt injection on every surface — use it to ask what an attacker can do before any prompt is ever sent.",
-            "“Steal the API key” belongs on the host or credential store, not the model; bonus to anyone who also marks the tools as part of the channel surface.",
-        ])))
-
     P.append(("terms", "Key terms", terms([
         ("Attack surface", "Everything an attacker can touch. For AI: training data, model, inference channel, supply chain, and the host the model runs on."),
         ("Label-flip poisoning", "Changing labels in training data so the trained model learns the wrong boundary. MITRE ATLAS AML.T0020."),

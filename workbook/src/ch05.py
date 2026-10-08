@@ -12,53 +12,6 @@ def build():
 <ul class="facts"><li><b>Time</b> about 1 h 30 min</li><li><b>Data</b> synthetic traffic vectors · sample incident reports</li><li><b>Libraries</b> numpy, scikit-learn, standard library</li><li><b>API key</b> optional (LLM extractor and playbook)</li></ul>
 '''))
 
-    P.append(("donow", "Do it now", donow(
-        num=5,
-        title="What needs a human?",
-        grouping="Individual",
-        tools="Paper or a notes file; class chat",
-        capture='One chat line: <code>GATE: A1-auto, A2-human, A3-human, A4-auto, A5-human, A6-human | STAR: A#</code>',
-        feeds="Part 2's human gate: your <code>auto</code>/<code>human</code> calls become the lab's <code>IRREVERSIBLE_ACTIONS</code> set and the <code>ApprovalQueue</code> that records who approved a <code>wipe</code> or <code>delete</code>",
-        goal="Decide which routine SOC actions an agent may run unattended and which must stop for a recorded human decision — by judging reversibility, not model confidence. Your sort is the draft of the policy set the lab encodes.",
-        deliverable='One chat line in the exact format <code>GATE: A1-auto, A2-human, … | STAR: A#</code>, plus six one-line worst cases on paper — one per action.',
-        need=[
-            "Paper or a notes file. No notebook, no accounts.",
-            "The six actions the instructor posts: <code>A1</code> enrich an alert with threat-intel reputation · <code>A2</code> isolate a host from the network · <code>A3</code> reset a user's password · <code>A4</code> block an IP at the firewall · <code>A5</code> close a false-positive ticket · <code>A6</code> wipe a laptop.",
-        ],
-        steps=[
-            (1, "<b>Read</b> the six actions A1–A6. For each, ask the only question that matters: if this ran unattended and wrong, could it be undone in seconds?"),
-            (2, "<b>Mark</b> each action <code>auto</code> (may run unattended) or <code>human</code> (must wait for a recorded approval), and write one line on the worst case if it ran unattended and wrong."),
-            (1, "<b>Star</b> the one action whose unattended worst case is hardest to recover from, and be ready to defend the call."),
-            (1, "<b>Post</b> your line in chat: <code>GATE: A1-auto, A2-human, … | STAR: A#</code>. Keep your six worst-case lines on paper — Part 2 will ask for them."),
-        ],
-        done_when="Your GATE line is in chat, every action has a one-line worst case on paper, and one action is starred.",
-        facilitator=[
-            ("Before class", "Post the six actions in chat and on the opening slide with IDs <code>A1</code>–<code>A6</code>, in order: enrich · isolate · reset · block · close · wipe. Nobody should be retyping them."),
-            ("Watch for", "Two predictable answers: gating everything (&ldquo;when in doubt, ask a human&rdquo;), which rebuilds the alert-fatigue queue the pipeline exists to remove; and <code>A5</code> marked <code>auto</code> because closing a ticket &ldquo;changes nothing&rdquo; — ask what happens when the scorer misjudges a real intrusion and the agent closes it unseen."),
-            ("Fallback", "No board or flaky chat: collect GATE lines on paper, read three aloud, and settle <code>A5</code> and <code>A6</code> as a room before starting Part 1."),
-        ],
-        pattern="<i>Reversibility decides:</i> ask &ldquo;can this be undone in seconds?&rdquo; before asking how confident the model is.",
-        antipattern="<i>Gate everything:</i> a human gate on reversible work adds latency until approvers start rubber-stamping, which is worse than no gate.",
-        reading=[
-            ("https://csrc.nist.gov/pubs/sp/800/61/r2/final", "NIST SP 800-61 Rev. 2, Computer Security Incident Handling Guide", "NIST"),
-            ("https://atlas.mitre.org/", "MITRE ATLAS — adversarial threats to AI-enabled systems", "MITRE"),
-            ("https://owasp.org/www-project-top-10-for-large-language-model-applications/", "OWASP Top 10 for LLM Applications (see Excessive Agency)", "OWASP"),
-        ],
-        answer="""GATE: A1-auto, A2-auto, A3-human, A4-auto, A5-human, A6-human | STAR: A6
-A1 enrich: worst case is a wrong reputation note on the alert — read-only, cheap to correct.
-A2 isolate: the wrong host is cut off (the CFO mid-board-call) — embarrassing, but undone in seconds.
-A3 reset: an attacker-triggered reset locks the real user out and hands over the account.
-A4 block: a legitimate partner or CDN is blocked — short blast radius, trivially reversible.
-A5 close: a mis-scored true positive is closed unseen and the intrusion continues with no open ticket.
-A6 wipe: state and forensic evidence are destroyed — irreversible, and the investigation loses the host.""",
-        lookfor=[
-            "<code>A1</code>, <code>A2</code>, <code>A4</code> marked <code>auto</code>: reversible, machine-speed actions — the same call the lab makes for quarantine and block.",
-            "<code>A6</code> marked <code>human</code>: wiping destroys state and evidence, exactly why the lab gates <code>wipe</code> behind the <code>ApprovalQueue</code>.",
-            "<code>A5</code> gated or starred: the instructive miss is calling close-ticket harmless because it &ldquo;changes nothing&rdquo; — an auto-closed true positive silences a live incident.",
-            "<code>A3</code> argued either way, with a worst case on both sides (user lockout vs. attacker-driven reset). The reasoning counts more than the label.",
-        ],
-    )))
-
     P.append(("terms", "Key terms", terms([
         ("SOC spine", "Collection → detection → triage → investigation → response. AI can speed up every stage."),
         ("Reconstruction scorer", "<code>ReconAnomalyScorer</code>: PCA trained on benign traffic; inputs it reconstructs badly are anomalies. A portable stand-in for an autoencoder."),

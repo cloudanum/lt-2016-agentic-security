@@ -250,7 +250,7 @@ def shell(title, body):
 
 
 CSS = r'''
-/* Layout: a lab-manual page — narrow reading column, sticky contents rail on wide screens,
+/* Layout: a lab-manual page: narrow reading column, sticky contents rail on wide screens,
    wide figures and output blocks that scroll inside their own frames. */
 :root{
   --bg:#f5f7f8; --surface:#ffffff; --ink:#14212b; --ink-2:#4a5b67; --rule:#d6dee3;
@@ -373,10 +373,13 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.92rem}
 .dn-steps .t{width:3rem;text-align:center;font-variant-numeric:tabular-nums;color:var(--ink-2)}
 .dn-done{border:1px solid var(--defend);background:var(--defend-bg);border-radius:8px;padding:.7rem .95rem;margin:1rem 0}
 .dn-done p{margin:0 0 .4rem} .dn-done p:last-child{margin-bottom:0}
-.dn-fac{border:1px solid var(--decide);background:var(--decide-bg);border-radius:8px;padding:.7rem .95rem;margin:1rem 0}
-.dn-fac-title{font-family:var(--f-display);font-weight:700;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--decide);margin:0 0 .35rem}
-.dn-fac dl{margin:0} .dn-fac dt{font-weight:700;margin-top:.35rem} .dn-fac dd{margin:0;color:var(--ink-2);font-size:.93rem}
-.dn-pattern,.dn-reading{font-size:.9rem;color:var(--ink-2)}
+.dn-info{border:1px solid var(--accent);background:var(--accent-soft);border-radius:8px;padding:.7rem .95rem;margin:1rem 0}
+.dn-info-title{font-family:var(--f-display);font-weight:700;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:0 0 .35rem}
+.dn-info p{margin:0 0 .4rem} .dn-info p:last-child{margin-bottom:0}
+.dn-pattern{font-size:.9rem;color:var(--ink-2)}
+.dn-reading{font-size:.9rem;color:var(--ink-2);margin:.6rem 0}
+.dn-reading-title{font-family:var(--f-display);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin:0 0 .25rem}
+.dn-reading ul{margin:0;padding-left:1.2rem;display:grid;gap:.2rem}
 details.dn-answer{border-top:1px solid var(--rule);margin-top:.8rem;padding-top:.5rem}
 details.dn-answer summary{cursor:pointer;font-family:var(--f-display);font-weight:700;color:var(--accent)}
 details.dn-answer pre{background:var(--code-bg);border:1px solid var(--rule);border-radius:8px;padding:.7rem .85rem;overflow-x:auto;white-space:pre-wrap;font:13px/1.5 var(--f-mono);margin:.5rem 0}
@@ -402,10 +405,11 @@ def takeaways(items):
 
 
 def donow(num, title, grouping, tools, capture, feeds, goal, deliverable, need,
-          steps, done_when, facilitator, pattern, antipattern, reading, answer, lookfor):
+          steps, done_when, news, pattern, antipattern, reading, answer, lookfor):
     """A five-minute "Do it now" opener card (pattern: course 1258 activities).
     steps: list of (minutes, html); minutes must sum to 5.
-    facilitator: list of (label, html); reading: list of (url, label, source);
+    news: (headline, html) for the "In the news" infobox;
+    reading: list of (url, label, source), rendered as bullets;
     answer: preformatted sample answer; lookfor: list of html items."""
     mins = [m for m, _ in steps]
     assert sum(mins) == 5, f"DN {num}: step minutes {mins} do not sum to 5"
@@ -414,8 +418,8 @@ def donow(num, title, grouping, tools, capture, feeds, goal, deliverable, need,
              f'<tr><th>Feeds</th><td colspan="3">{feeds}</td></tr>')
     need_html = "".join(f"<li>{n}</li>" for n in need)
     step_rows = "".join(f'<tr><td class="t">{m}</td><td>{s}</td></tr>' for m, s in steps)
-    fac = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in facilitator)
-    refs = "; ".join(f'<a href="{u}">{esc(label)}</a> ({src})' for u, label, src in reading)
+    headline, news_body = news
+    refs = "".join(f'<li><a href="{u}">{esc(label)}</a> ({src})</li>' for u, label, src in reading)
     look = "".join(f"<li>{l}</li>" for l in lookfor)
     return f'''<div class="dn-card">
 <p class="eyebrow">Lab {num} · Do it now · 5 minutes</p>
@@ -428,13 +432,13 @@ def donow(num, title, grouping, tools, capture, feeds, goal, deliverable, need,
 <h4>Steps</h4>
 <div class="tblwrap"><table class="tbl dn-steps"><thead><tr><th>Min</th><th>Step</th></tr></thead><tbody>{step_rows}</tbody></table></div>
 <div class="dn-done"><p><b>Capture.</b> {capture}</p><p><b>Done when.</b> {done_when}</p></div>
-<div class="dn-fac"><p class="dn-fac-title">Facilitator notes</p><dl>{fac}</dl></div>
+<div class="dn-info"><p class="dn-info-title">In the news</p><p><b>{headline}.</b> {news_body}</p></div>
 <p class="dn-pattern"><b>Pattern.</b> {pattern} <b>Anti-pattern.</b> {antipattern}</p>
-<p class="dn-reading"><b>Further reading.</b> {refs}</p>
+<div class="dn-reading"><p class="dn-reading-title">Further reading</p><ul>{refs}</ul></div>
 <details class="dn-answer"><summary>Answer key</summary>
 <p class="eyebrow">Sample answer</p>
 <pre>{esc(answer)}</pre>
 <p class="eyebrow">Look for</p>
 <ul>{look}</ul>
 </details>
-</div>''' + "</ol>"
+</div>'''

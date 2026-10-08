@@ -12,69 +12,6 @@ def build():
 <ul class="facts"><li><b>Time</b> about 1 h 25 min</li><li><b>Data</b> a sample system profile and component list</li><li><b>Libraries</b> standard library only</li><li><b>API key</b> not used</li></ul>
 '''))
 
-    P.append(("donow", "Do it now", donow(
-        6, "Sort by risk tier",
-        "Individual",
-        "Paper, or chat; a board if the room has one",
-        "<code>SORT: S1-&lt;tier&gt;, S2-&lt;tier&gt;, …, S6-&lt;tier&gt;</code> plus one WHY line per card",
-        "Part 1 — Classify: the same two questions drive <code>eu_ai_act_tier</code>, and each tier's duty list",
-        "Place six AI uses in the EU AI Act tiers (unacceptable / high / limited / minimal) before any code opens, "
-        "so the lab's classifier has something to be checked against.",
-        "Your six-card sort posted in chat, each card with a one-line justification that names the rule, not the vibe.",
-        [
-            "The tier ladder, in order: <b>unacceptable</b> (prohibited practice, Art. 5) → <b>high</b> (Annex III use) → "
-            "<b>limited</b> (interacts with people or generates content, Art. 50) → <b>minimal</b> (everything else).",
-            "The six cards, posted in chat or on the board: "
-            "<b>S1</b> a spam filter on the company mailbox · <b>S2</b> an agent that screens job applicants and ranks CVs · "
-            "<b>S3</b> a deepfake video generator · <b>S4</b> a medical-triage chatbot that directs patients to care · "
-            "<b>S5</b> a game NPC that patrols a level · <b>S6</b> a webcam agent that reads employees' emotions to flag unhappy staff.",
-        ],
-        [
-            (1, "<b>Read</b> the tier ladder and cards S1–S6. For each card, ask the two questions in order: "
-                "<i>is this a prohibited practice?</i> then <i>is it an Annex III use?</i> The first yes sets the tier."),
-            (2, "<b>Sort</b> each card into a tier. If neither question is yes, ask whether it talks to the public or "
-                "generates content (limited); otherwise it is minimal."),
-            (1, "<b>Justify</b> each card in one line, naming the rule that placed it — for example "
-                "<code>S2: employment is an Annex III use</code>, not <code>S2: feels risky</code>."),
-            (1, "<b>Post</b> your line in chat: <code>SORT: S1-minimal, S2-high, …</code> with your six WHY lines beneath it. "
-                "Star the card you are least sure about."),
-        ],
-        "All six cards carry a tier and a one-line why that names a rule, and your sort is in chat.",
-        [
-            ("Before class", "Post the tier ladder and the six cards in chat, numbered S1–S6, so nobody retypes them. "
-             "Keep the notebook closed: this sort is the baseline Part 1 is checked against."),
-            ("Watch for", "S6 placed as high because it is &ldquo;about employees&rdquo; — monitoring productivity is an Annex III "
-             "(employment) use, but <i>inferring emotions in the workplace</i> is a prohibited practice, so S6 is unacceptable. "
-             "Also watch for S3 as unacceptable: the Act bans prohibited <i>uses</i>, not generators; a deepfake tool carries "
-             "Art. 50 labelling duties. And S4 as minimal because it is &ldquo;only advice&rdquo; — triage steers access to an "
-             "essential service, which is Annex III territory."),
-            ("Fallback", "No board or chat trouble: read the six cards aloud and take the sort by show of hands per tier, "
-             "capturing the majority line on the instructor machine as <code>SORT: S1-…, S2-…, …</code>."),
-        ],
-        "<i>Two questions, in order:</i> prohibited? then Annex III? The first yes sets the tier, and the tier sets the duties.",
-        "<i>Sorting by vibes:</i> ranking uses by how scary they feel instead of by the Act's questions — the wrong answers "
-        "above all come from skipping the questions.",
-        [
-            ("https://artificialintelligenceact.eu/high-level-summary/", "EU AI Act: high-level summary", "artificialintelligenceact.eu"),
-            ("https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "Regulatory framework for AI", "European Commission"),
-            ("https://www.nist.gov/itl/ai-risk-management-framework", "AI Risk Management Framework", "NIST"),
-        ],
-        """S1-minimal   internal mail filtering; no AI-Act-specific duties
-S2-high      employment / worker selection is an Annex III use
-S3-limited   generates synthetic content: Art. 50 labelling duty
-S4-high      triage affects access to essential (health) services: Annex III
-S5-minimal   in-game pathfinding; no public interaction, no generated content
-S6-unacceptable  workplace emotion recognition is a prohibited practice (Art. 5)""",
-        [
-            "S6 unacceptable with the <i>rule</i> named (workplace emotion recognition, Art. 5), not just &ldquo;creepy&rdquo; — "
-            "and the contrast that plain productivity monitoring would have been high.",
-            "S3 limited, not unacceptable: a deepfake tool carries Art. 50 disclosure duties unless it is used for a prohibited practice.",
-            "Every WHY line cites a rule (Art. 5, Annex III, Art. 50) rather than a severity feeling.",
-            "S2 and S4 high with at least one duty anticipated — logging, human oversight, conformity assessment — which is "
-            "the list Part 1 prints.",
-        ],
-    )))
-
     P.append(("terms", "Key terms", terms([
         ("EU AI Act risk tiers", "Unacceptable (prohibited, Art. 5) → high (Annex III uses) → limited (transparency, Art. 50) → minimal. The lab's classifier is a simplified teaching model, not legal advice."),
         ("Annex III", "The EU AI Act's list of high-risk uses, including employment, credit scoring, education and critical infrastructure."),

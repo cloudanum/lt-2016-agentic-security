@@ -12,62 +12,6 @@ def build():
 <ul class="facts"><li><b>Time</b> about 1 h 45 min</li><li><b>Data</b> 12 inline documents → 22 chunks</li><li><b>Libraries</b> numpy, scikit-learn</li><li><b>API key</b> optional (one live answer)</li></ul>
 '''))
 
-    P.append(("donow", "Do it now", donow(
-        2, "Who may read this?",
-        "Individual",
-        "Paper or chat — no code",
-        "<code>SORT: D1-P, D2-I, ... | STAR: D# because ___</code>",
-        "Part 3 — the <code>DOC_ACL</code> table and the <code>APPROVED_SOURCES</code> provenance allowlist inside <code>secure_rag_query</code>",
-        "Decide, before any store is built, which roles may read each document the assistant will ingest. "
-        "The sort you produce here is exactly the shape of the <code>DOC_ACL</code> table you write in Part 3, "
-        "and the starred call is where an access decision is hardest to make.",
-        "One line with all eight documents zoned and your least-certain call starred with a reason: "
-        "<code>SORT: D1-P, D2-I, ... | STAR: D# because ___</code> (P = PUBLIC, I = INTERNAL, R = IR-TEAM-ONLY).",
-        [
-            "The three zone definitions, least to most restricted: <b>PUBLIC</b> (anyone, including outside the organization), "
-            "<b>INTERNAL</b> (any staff member), <b>IR-TEAM-ONLY</b> (the incident-response team, need-to-know).",
-            "The eight document descriptions, posted in chat or on the board:<br>"
-            "<b>D1</b> A vendor's public blog advisory on the Q3 finance-malware campaign. · "
-            "<b>D2</b> Your SOC's ransomware playbook: isolate the host, check shadow copies, first response steps. · "
-            "<b>D3</b> The incident note for IR-2026-014 — hostnames, timeline, customer impact — marked <i>INTERNAL — IR TEAM ONLY</i>. · "
-            "<b>D4</b> The MITRE ATT&amp;CK page for T1490, Inhibit System Recovery. · "
-            "<b>D5</b> The phishing playbook, including the lure templates your SOC reuses in awareness training. · "
-            "<b>D6</b> A community threat-intel pulse from an open feed listing typosquat domains. · "
-            "<b>D7</b> An HR note naming the employee whose privileged account appears in the insider-risk playbook. · "
-            "<b>D8</b> A draft of next quarter's public security-awareness blog post, not yet approved by comms.",
-            "Paper or a chat window. The notebook stays closed.",
-        ],
-        [
-            (1, "<b>Read</b> the three zones and D1–D8. For each document ask one question: <i>if this leaked tomorrow, who is harmed?</i>"),
-            (2, "<b>Sort</b> every document into a zone, writing your line as <code>SORT: D1-P, D2-I, ...</code> using P, I, R. No blanks and no ties — commit to one zone per document."),
-            (1, "<b>Star</b> the call you are least sure about and finish the line: <code>| STAR: D# because ___</code>. One reason, in your own words."),
-            (1, "<b>Check</b> your sort against the key as the instructor reveals it, and ask about your starred item."),
-        ],
-        "Your line is posted: all eight documents zoned, one starred with a reason.",
-        [
-            ("Before class", "Post the three zone definitions and the eight one-line descriptions in chat, or write them on the board, so nobody retypes them. Keep the key hidden until the reveal minute."),
-            ("Watch for", "D8 in PUBLIC because it is “basically public already” — a draft is internal until comms approves it; classification follows the document's state today. And D7 in INTERNAL because it is “just an HR note” — personal data attached to an active investigation is need-to-know. If D6 is starred, check the reason: readable by anyone is not the same as trusted to ingest."),
-            ("Fallback", "No board or chat: read the documents aloud one at a time and have learners hold up P, I or R fingers, then cold-call for the starred call. Collect sorts on paper and read two aloud at the reveal."),
-        ],
-        "<i>Classify before you index:</i> decide who may read a source before it enters the store, while the decision is still cheap.",
-        "<i>Retrieve first, restrict later:</i> discovering the IR note in everyone's answers after the store has already served it.",
-        [
-            ("https://owasp.org/www-project-top-10-for-large-language-model-applications/", "OWASP Top 10 for LLM Applications", "OWASP — see LLM02 Sensitive Information Disclosure"),
-            ("https://atlas.mitre.org/techniques/AML.T0070", "RAG Poisoning (AML.T0070)", "MITRE ATLAS"),
-            ("https://csrc.nist.gov/publications/detail/fips/199/final", "FIPS 199, Security Categorization of Information and Information Systems", "NIST"),
-        ],
-        """SORT: D1-P, D2-I, D3-R, D4-P, D5-I, D6-P, D7-R, D8-I
-STAR: D8 because it is meant to become public,
-but until comms approves the draft only staff
-should read it.""",
-        [
-            "D3 <b>and</b> D7 in IR-TEAM-ONLY: the incident note is marked, and the HR note mixes personal data with an active investigation — both are need-to-know.",
-            "D8 in INTERNAL, not PUBLIC: “will be public” is not public. Classification follows the document's state today, not its destination.",
-            "D6 zoned PUBLIC for read access, with the nuance noted if the learner starred it: anyone may read a community feed, but Part 3's <code>APPROVED_SOURCES</code> allowlist is what decides whether it may be <b>ingested</b>.",
-            "A star with a reason, not just a star — the reason is what turns into an ACL entry or an exception request later.",
-        ],
-    )))
-
     P.append(("terms", "Key terms", terms([
         ("Retrieval-augmented generation (RAG)", "Answering from documents retrieved at query time instead of from the model's memory. Pipeline: chunk → embed → store → retrieve → augment → generate."),
         ("Chunk", "A slice of a document (here about 300 characters with 60 overlapping) that is embedded and retrieved on its own. Each chunk keeps its <code>source</code> tag."),
