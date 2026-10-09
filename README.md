@@ -11,6 +11,11 @@ hidden solutions; and an **auto-graded quiz**.
 
 - `code/Ch01-Lab.ipynb … Ch07-Lab.ipynb` — the lab notebooks (details in
   [`code/README.md`](code/README.md))
+- `demos/pyrit-red-team.ipynb` — tool-spotlight demo: red-team the Lab 3
+  translation bot with Microsoft's [PyRIT](https://github.com/Azure/PyRIT)
+  (one-shot campaign, Crescendo multi-turn, then the same campaign against the
+  defended pipeline). Needs `pip install pyrit openai`; runs offline with
+  scripted stand-ins when no API key is set.
 - `results/Ch0N-results.md` — highlights plus every cell output from the latest
   full run of each notebook (regenerate with `python3 gen_results.py`; the
   header states whether the run used a live key)

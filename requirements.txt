@@ -13,3 +13,4 @@ openai
 #   kafka-python       (Ch05 event bus — falls back to an in-process bus)
 #   presidio-analyzer presidio-anonymizer  (Ch02 DLP — falls back to regex)
 #   OTXv2              (Ch04 threat intel — skipped without network/key)
+#   pyrit              (demos/pyrit-red-team.ipynb — red-team campaigns)
