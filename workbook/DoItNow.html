@@ -74,7 +74,7 @@ figcaption{font-size:.9rem;color:var(--ink-2);margin-top:.5rem;max-width:68ch}
 .k-defend{fill:var(--defend-bg);stroke:var(--defend)} .k-defend-t{fill:var(--ink)}
 .k-data{fill:var(--data-bg);stroke:var(--data)} .k-data-t{fill:var(--ink)}
 .k-decision{fill:var(--decide-bg);stroke:var(--decide)} .k-decision-t{fill:var(--ink)}
-.d-t{font:600 13px var(--f-body)} .d-sub{font:12px var(--f-body);opacity:.8}
+.d-t{font:600 13px var(--f-body)} .d-sub{font:12px var(--f-body);opacity:.8;fill:var(--ink-2)}
 .d-edge{fill:none;stroke:currentColor;stroke-width:1.6} .d-dash{stroke-dasharray:5 4}
 .d-lblbg{fill:var(--surface)} .d-lbl{font:11.5px var(--f-mono);fill:var(--ink-2)}
 .d-note{font:italic 12px var(--f-body);fill:var(--ink-2)}
@@ -166,11 +166,11 @@ html{scroll-behavior:smooth}
 <section id="top">
 <p class="eyebrow">Course 1216 · AI and Cyber Security: Attack and Defend</p>
 <h1 class="doc-title">Do It Now</h1>
-<p class="lede" style="margin-top:1rem">Seven five-minute openers, one per lab, built for an online room. Run each at the start of its chapter, before anyone opens the notebook: a Mural board and the Zoom chat are all you need.</p>
-<p>Every card has the same anatomy: a facts table with time, grouping, tools, and the exact capture format; a goal and a deliverable; timed steps that add to five minutes; a capture line with a "done when" check; an "In the news" box with a real incident on the same theme; a pattern and anti-pattern line; bulleted further reading; and a collapsible answer key with a sample answer and look-for points. The capture line each card produces is picked up again inside its lab.</p>
+<p class="lede" style="margin-top:1rem">Seven openers, one per lab, built for an online room. Six run five minutes; DN 4 runs fifteen because it doubles as a guided first threat model against the NIST AI RMF Playbook. Run each at the start of its chapter, before anyone opens the notebook: a Mural board and the Zoom chat are all you need.</p>
+<p>Every card has the same anatomy: a facts table with time, grouping, tools, and the exact capture format; a goal and a deliverable; timed steps that add to the card's stated time; a capture line with a "done when" check; an "In the news" box with a real incident on the same theme; a pattern and anti-pattern line; bulleted further reading; and a collapsible answer key with a sample answer and look-for points. The capture line each card produces is picked up again inside its lab.</p>
 <ol class="steps">
 <li><b>Before class</b>: build the Mural board the card's "You need" list calls for (one frame per zone or tier, sticky notes for the items to sort), and drop the board link in the Zoom chat as learners join.</li>
-<li><b>In class</b>: run the steps as written; the timings add to five minutes. If Mural fails, paste the items as a numbered list in the Zoom chat and have learners reply with their sort line.</li>
+<li><b>In class</b>: run the steps as written; the timings add to the card's stated time (five minutes, fifteen for DN 4). If Mural fails, paste the items as a numbered list in the Zoom chat and have learners reply with their sort line.</li>
 <li><b>During the lab</b>: return to the capture line where the card's "Feeds" entry says it lands.</li>
 <li><b>When debriefing</b>: open the card's answer key, and point learners to the news story and the further reading.</li>
 </ol>
@@ -283,38 +283,122 @@ is a command; intent, not signature.</pre>
 <section class="dn-sec" id="dn4">
   <p class="labtag">Pairs with Lab 4 of 7 · <code>code/Ch04-Lab.ipynb</code></p>
   <div class="dn-card">
-<p class="eyebrow">Lab 4 · Do it now · 5 minutes</p>
-<h3><span class="dn-badge">DN 4</span> Name the surface</h3>
-<table class="dn-facts"><tr><th>Time</th><td>5 min</td><th>Grouping</th><td>Individual</td></tr><tr><th>Tools</th><td>Mural board and Zoom chat</td><th>Capture</th><td>Zoom chat line: <code>S1-data: ... | S2-model: ... | S3-channel: ... | S4-host: ...</code></td></tr><tr><th>Feeds</th><td colspan="3">Parts 1-4 of this lab: each surface you label becomes one attack lane you run and then defend, and the four lanes close in the kill-chain table</td></tr></table>
-<p><b>Goal.</b> Take a simple sketched LLM application and mark the four places an attacker can touch it, with one attack idea for each. This is threat modelling in miniature: start from where the attacker can reach, not from the defenses you happen to have.</p>
-<p><b>Deliverable.</b> One Zoom chat line naming all four surfaces and one attack per surface, in the exact capture format below.</p>
+<p class="eyebrow">Lab 4 · Do it now · 15 minutes</p>
+<h3><span class="dn-badge">DN 4</span> Name the surface, then anchor it to the AI RMF</h3>
+<table class="dn-facts"><tr><th>Time</th><td>15 min</td><th>Grouping</th><td>Individual</td></tr><tr><th>Tools</th><td>Mural board, Zoom chat, and the <a href="https://airc.nist.gov/AI_RMF_Knowledge_Base/Playbook">NIST AI RMF Playbook</a> open in a browser tab</td><th>Capture</th><td><code>S1-data: &lt;attack&gt; → &lt;RMF ref&gt; | S2-model: &lt;attack&gt; → &lt;RMF ref&gt; | S3-channel: &lt;attack&gt; → &lt;RMF ref&gt; | S4-host: &lt;attack&gt; → &lt;RMF ref&gt;</code></td></tr><tr><th>Feeds</th><td colspan="3">Parts 1-4 of this lab: each surface you label becomes one attack lane you run and then defend, and the four lanes close in the kill-chain table; the RMF references you attach come back in Lab 6's governance checklist</td></tr></table>
+<p><b>Goal.</b> Take the sketched LLM application below and mark the four places an attacker can touch it, with one attack idea for each — then anchor every attack to the <a href="https://airc.nist.gov/AI_RMF_Knowledge_Base/Playbook">NIST AI RMF Playbook</a> by finding the playbook subcategory (a GOVERN, MAP, MEASURE, or MANAGE action) whose work would surface or counter it. This is threat modelling in miniature: start from where the attacker can reach, not from the defenses you happen to have — and finish with a framework hook that turns your list into a program.</p>
+<p><b>Deliverable.</b> One Zoom chat line naming all four surfaces, one attack per surface, and one RMF subcategory per attack, in the exact capture format below.</p>
+<figure class="diagram">
+<div class="scroll">
+<svg viewBox="0 0 960 620" role="img" aria-label="Attack-surface sketch of an LLM application: user, API, model and tools inside a host VM, a training-data store feeding the model, the four attack surfaces S1 to S4, and one attack lane per surface">
+  <!-- S4: the host VM holds the whole stack -->
+  <rect class="d-band" x="40" y="20" width="880" height="560" rx="12"/>
+  <text class="d-bandlabel" x="64" y="48">S4 · Host VM</text>
+
+  <!-- request path: user -> API -> model -> tools (S3) -->
+  <rect class="d-node k-step" x="100" y="100" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="165" y="124" text-anchor="middle">user</text>
+  <text class="d-sub" x="165" y="142" text-anchor="middle">analyst or public</text>
+  <rect class="d-node k-step" x="290" y="100" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="355" y="124" text-anchor="middle">API</text>
+  <text class="d-sub" x="355" y="142" text-anchor="middle">gateway · auth · filters</text>
+  <rect class="d-node k-step" x="480" y="100" width="140" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="550" y="124" text-anchor="middle">model</text>
+  <text class="d-sub" x="550" y="142" text-anchor="middle">LLM or classifier</text>
+  <rect class="d-node k-step" x="690" y="100" width="150" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="765" y="124" text-anchor="middle">tools</text>
+  <text class="d-sub" x="765" y="142" text-anchor="middle">CVE DB · firewall · mail</text>
+  <path class="d-edge" d="M230,128 L290,128"/>
+  <text class="d-lbl" x="260" y="118" text-anchor="middle">prompt</text>
+  <path class="d-edge" d="M420,128 L480,128"/>
+  <path class="d-edge" d="M620,128 L690,128"/>
+  <text class="d-lbl" x="655" y="118" text-anchor="middle">tool calls</text>
+  <path class="d-edge d-dash" d="M690,146 L620,146"/>
+  <text class="d-lbl" x="655" y="162" text-anchor="middle">results</text>
+  <circle class="d-node k-terminal" cx="450" cy="128" r="16"/>
+  <text class="d-lbl" x="450" y="132" text-anchor="middle">S3</text>
+  <text class="d-note" x="450" y="192" text-anchor="middle">S3 · the inference channel every user shares</text>
+
+  <!-- S1: the training-data store feeds the model before any prompt is sent -->
+  <rect class="d-node k-data" x="200" y="300" width="200" height="64" rx="8"/>
+  <text class="d-t k-data-t" x="300" y="326" text-anchor="middle">training-data store</text>
+  <text class="d-sub" x="300" y="344" text-anchor="middle">docs · tickets · fine-tune sets</text>
+  <path class="d-edge" d="M345,300 L500,158"/>
+  <text class="d-lbl" x="365" y="222">training / fine-tuning</text>
+  <circle class="d-node k-terminal" cx="200" cy="300" r="16"/>
+  <text class="d-lbl" x="200" y="304" text-anchor="middle">S1</text>
+
+  <!-- S2: the model itself -->
+  <circle class="d-node k-terminal" cx="492" cy="96" r="16"/>
+  <text class="d-lbl" x="492" y="100" text-anchor="middle">S2</text>
+
+  <!-- one attack lane per surface -->
+  <g style="color:var(--attack)">
+    <path class="d-edge d-dash" d="M300,420 L300,366"/>
+    <path class="d-edge d-dash" d="M680,230 L600,158"/>
+    <path class="d-edge d-dash" d="M430,80 L446,110"/>
+    <path class="d-edge d-dash" d="M700,551 L700,577"/>
+  </g>
+  <rect class="d-node k-attack" x="140" y="420" width="260" height="46" rx="8"/>
+  <text class="d-t k-attack-t" x="270" y="439" text-anchor="middle">poisoning</text>
+  <text class="d-sub" x="270" y="456" text-anchor="middle">flip labels so malware looks benign</text>
+  <rect class="d-node k-attack" x="660" y="230" width="250" height="46" rx="8"/>
+  <text class="d-t k-attack-t" x="785" y="249" text-anchor="middle">extraction</text>
+  <text class="d-sub" x="785" y="266" text-anchor="middle">query the API · train a surrogate</text>
+  <rect class="d-node k-attack" x="200" y="36" width="270" height="44" rx="8"/>
+  <text class="d-t k-attack-t" x="335" y="54" text-anchor="middle">injection · payload splitting</text>
+  <text class="d-sub" x="335" y="71" text-anchor="middle">instructions riding in the request</text>
+  <rect class="d-node k-attack" x="560" y="505" width="280" height="46" rx="8"/>
+  <text class="d-t k-attack-t" x="700" y="524" text-anchor="middle">process hollowing</text>
+  <text class="d-sub" x="700" y="541" text-anchor="middle">implant in memory on the VM</text>
+  <text class="d-note" x="64" y="556">the AI stack is software on a machine — classic host attacks still apply</text>
+</svg>
+</div>
+<figcaption>The same sketch the Mural board carries: <code>user → API → model → tools</code> inside a host VM, with the training-data store feeding the model. The four surfaces an attacker can touch are numbered: <b>S1</b> the training data (reached before any prompt is ever sent), <b>S2</b> the model itself, <b>S3</b> the inference channel every user shares, and <b>S4</b> the host the stack runs on. The red boxes are the four attack lanes this lab walks, one per surface.</figcaption>
+</figure>
+<div class="legend"><span><span class="sw k-step"></span> component</span><span><span class="sw k-data"></span> data</span><span><span class="sw k-attack"></span> attack lane</span><span>S1 training data · S2 model · S3 inference channel · S4 host VM</span></div>
 <h4>You need</h4>
-<ul class="dn-need"><li>The Mural board link, posted in the Zoom chat: the instructor has pre-drawn the sketch in a frame, with <code>user → API → model → tools</code> across the top, a <b>training-data store</b> feeding the model, and a box underneath labelled <i>host VM</i> that holds all of it.</li><li>Four empty label stickies (S1-S4) on the board, with space beside each for an attack sticky.</li><li>If Mural fails: the instructor pastes the ASCII sketch and the capture template in the Zoom chat; you label your own copy in a notes file and reply with your line.</li></ul>
+<ul class="dn-need"><li>A browser tab open on the <a href="https://airc.nist.gov/AI_RMF_Knowledge_Base/Playbook">NIST AI RMF Playbook</a> (airc.nist.gov). If the site is unreachable, the instructor shares the same playbook as a PDF (<code>AI_RMF_Playbook.pdf</code>) in the Zoom chat — the table of contents lists every subcategory as <code>GOVERN x.x</code>, <code>MAP x.x</code>, <code>MEASURE x.x</code>, <code>MANAGE x.x</code>.</li><li>The Mural board link, posted in the Zoom chat: the instructor has pre-drawn the sketch above in a frame — <code>user → API → model → tools</code> across the top, the <b>training-data store</b> feeding the model, and the <i>host VM</i> box holding all of it.</li><li>Four empty label stickies (S1-S4) on the board, with space beside each for an attack sticky.</li></ul>
 <h4>Steps</h4>
-<div class="tblwrap"><table class="tbl dn-steps"><thead><tr><th>Min</th><th>Step</th></tr></thead><tbody><tr><td class="t">1</td><td><b>Find</b> the sketch frame on the Mural board: user → API → model → tools across the top, the training-data store feeding the model, and the host VM box holding all of it.</td></tr><tr><td class="t">1</td><td><b>Label</b> the four surfaces an attacker can touch by moving the S1-S4 stickies into place: <code>S1</code> training data, <code>S2</code> the model, <code>S3</code> the inference channel (the request path user → API → model → tools), <code>S4</code> the host.</td></tr><tr><td class="t">2</td><td><b>Attack</b>: beside each label, add a sticky with one attack idea, phrased as a short attacker action, not a defense and not a worry. Example shape: <i>flip training labels so the model waves malware through</i>.</td></tr><tr><td class="t">1</td><td><b>Post</b> your capture line in the Zoom chat: <code>S1-data: &lt;attack&gt; | S2-model: &lt;attack&gt; | S3-channel: &lt;attack&gt; | S4-host: &lt;attack&gt;</code></td></tr></tbody></table></div>
-<div class="dn-done"><p><b>Capture.</b> Zoom chat line: <code>S1-data: ... | S2-model: ... | S3-channel: ... | S4-host: ...</code></p><p><b>Done when.</b> All four labels sit on the sketch, each carries one attack sticky phrased as something the attacker <i>does</i>, and your line is in the Zoom chat.</p></div>
-<div class="dn-info"><p class="dn-info-title">In the news</p><p><b>EchoLeak: a zero-click attack on Microsoft 365 Copilot.</b> Disclosed in June 2025 by Aim Security, CVE-2025-32711 (CVSS 9.3) let an attacker email a victim a message carrying hidden instructions. When Copilot's retrieval engine later pulled that email in as context, the instructions made it exfiltrate data from the victim's mail, OneDrive, and SharePoint through crafted links, with no click and no user interaction. Microsoft patched it server-side before disclosure and reported no exploitation. Notice which surfaces did the work: the attacker never touched the model itself, only the data and the channel. Source: <a href="https://thehackernews.com/2025/06/zero-click-ai-vulnerability-exposes.html">The Hacker News</a>.</p></div>
-<p class="dn-pattern"><b>Pattern.</b> <i>Attack the diagram first:</i> a threat model starts from where the attacker can touch the system, and the lab then works one layer at a time down exactly those surfaces. <b>Anti-pattern.</b> <i>One-surface thinking:</i> treating “AI security” as prompt injection and leaving the training data and the host unguarded, the two surfaces this lab shows are quiet and cheap to attack.</p>
-<div class="dn-reading"><p class="dn-reading-title">Further reading</p><ul><li><a href="https://atlas.mitre.org/">MITRE ATLAS: adversarial tactics and techniques against AI systems</a> (MITRE)</li><li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">OWASP Top 10 for LLM Applications</a> (OWASP)</li><li><a href="https://www.aimsecurity.ai/blog/echoleak-zero-click-copilot-vulnerability">EchoLeak: the original zero-click Copilot vulnerability disclosure</a> (Aim Security)</li></ul></div>
+<div class="tblwrap"><table class="tbl dn-steps"><thead><tr><th>Min</th><th>Step</th></tr></thead><tbody>
+<tr><td class="t">2</td><td><b>Open</b> the <a href="https://airc.nist.gov/AI_RMF_Knowledge_Base/Playbook">AI RMF Playbook on the web</a> and scan its table of contents. Notice the four functions — <b>GOVERN</b> (policies, roles, risk appetite), <b>MAP</b> (name the context and the risks), <b>MEASURE</b> (test and evaluate them), <b>MANAGE</b> (treat them and watch the system live). Then study the diagram above and find the four surfaces S1-S4.</td></tr>
+<tr><td class="t">2</td><td><b>Label</b> the four surfaces on the Mural sketch by moving the S1-S4 stickies into place: <code>S1</code> training data, <code>S2</code> the model, <code>S3</code> the inference channel (the request path user → API → model → tools), <code>S4</code> the host.</td></tr>
+<tr><td class="t">3</td><td><b>Attack</b>: beside each label, add a sticky with one attack idea, phrased as a short attacker action, not a defense and not a worry. Example shape: <i>flip training labels so the model waves malware through</i>.</td></tr>
+<tr><td class="t">4</td><td><b>Anchor</b> each attack to the playbook: for every surface, find one subcategory whose actions would surface or counter your attack, and note it as <code>FUNCTION x.x</code> with a three-to-five-word reason. Hunting hints: <code>MAP 1.1</code> (context and misuse documented), <code>MAP 4.1</code> (third-party data and component risk), <code>MAP 5.1</code> (likelihood and magnitude of impacts), <code>MEASURE 2.7</code> (security and resilience evaluated), <code>MANAGE 4.1</code> (post-deployment monitoring and incident response). Any well-argued subcategory counts.</td></tr>
+<tr><td class="t">2</td><td><b>Post</b> your capture line in the Zoom chat: <code>S1-data: &lt;attack&gt; → &lt;RMF ref&gt; | S2-model: &lt;attack&gt; → &lt;RMF ref&gt; | S3-channel: &lt;attack&gt; → &lt;RMF ref&gt; | S4-host: &lt;attack&gt; → &lt;RMF ref&gt;</code></td></tr>
+<tr><td class="t">2</td><td><b>Check</b> your line against the reveal, and notice what is missing: no GOVERN action stopped any of your four attacks. Discuss for a moment what GOVERN contributes instead — the policies, roles, and risk appetite the other three functions execute.</td></tr>
+</tbody></table></div>
+<div class="dn-done"><p><b>Capture.</b> <code>S1-data: &lt;attack&gt; → &lt;RMF ref&gt; | S2-model: &lt;attack&gt; → &lt;RMF ref&gt; | S3-channel: &lt;attack&gt; → &lt;RMF ref&gt; | S4-host: &lt;attack&gt; → &lt;RMF ref&gt;</code></p><p><b>Done when.</b> All four labels sit on the sketch, each carries one attack sticky phrased as something the attacker <i>does</i>, every attack is anchored to a playbook subcategory with a short reason, and your line is in the Zoom chat.</p></div>
+<div class="dn-info"><p class="dn-info-title">In the news</p><p><b>EchoLeak: a zero-click attack on Microsoft 365 Copilot.</b> Disclosed in June 2025 by Aim Security, CVE-2025-32711 (CVSS 9.3) let an attacker email a victim a message carrying hidden instructions. When Copilot's retrieval engine later pulled that email in as context, the instructions made it exfiltrate data from the victim's mail, OneDrive, and SharePoint through crafted links, with no click and no user interaction. Microsoft patched it server-side before disclosure and reported no exploitation. Notice which surfaces did the work: the attacker never touched the model itself, only the data and the channel. The playbook's answer is the loop you just ran: MAP names those surfaces, MEASURE tests them, MANAGE watches them in production. Source: <a href="https://thehackernews.com/2025/06/zero-click-ai-vulnerability-exposes.html">The Hacker News</a>.</p></div>
+<p class="dn-pattern"><b>Pattern.</b> <i>Name it, then anchor it:</i> a threat model starts from where the attacker can touch the system, and it becomes a program when every surface cites the playbook action that maps, measures, or manages it. <b>Anti-pattern.</b> <i>One-surface thinking</i> — treating “AI security” as prompt injection and leaving the training data and the host unguarded — and its twin, <i>framework-free threat modelling:</i> a wall of stickies that no control ever answers.</p>
+<div class="dn-reading"><p class="dn-reading-title">Further reading</p><ul><li><a href="https://airc.nist.gov/AI_RMF_Knowledge_Base/Playbook">AI RMF Playbook — suggested actions for every GOVERN / MAP / MEASURE / MANAGE subcategory</a> (NIST AI Resource Center)</li><li><a href="https://www.nist.gov/itl/ai-risk-management-framework">AI Risk Management Framework (NIST AI 100-1) and Generative AI Profile</a> (NIST)</li><li><a href="https://atlas.mitre.org/">MITRE ATLAS: adversarial tactics and techniques against AI systems</a> (MITRE)</li></ul></div>
 <details class="dn-answer"><summary>Answer key</summary>
 <p class="eyebrow">Sample answer</p>
-<pre>Sketch: user -&gt; API -&gt; model -&gt; tools
-            training-data store -&gt; model (training)
-            all of it inside the host VM
+<pre>S1-data: flip labels so the model waves malware through → MAP 4.1
+S2-model: query the prediction API thousands of times and train a copy → MEASURE 2.7
+S3-channel: split a blocked request across turns so no message trips the filter → MANAGE 4.1
+S4-host: hollow a legitimate process and run the implant in memory only → MANAGE 4.1
 
-    S1-data: flip labels so the model learns to wave malware through (poisoning)
-    S2-model: query the prediction API thousands of times and train a copy (extraction)
-    S3-channel: split a blocked request across turns so no single message trips the filter
-    S4-host: hollow a legitimate process on the VM and run the implant in memory only
-
-    Why these four:
+    Why these four surfaces:
     S1: the attacker reaches the model before any user sends a prompt, through
     what it learns from.
     S2: the model itself leaks or yields through its own prediction interface.
     S3: every user shares the request path, so filters and context live there.
-    S4: the AI stack is software on a machine; classic host attacks still apply.</pre>
+    S4: the AI stack is software on a machine; classic host attacks still apply.
+
+    Why these anchors (any well-argued subcategory counts):
+    MAP 4.1 maps the risk of third-party data and components — the training
+    store is exactly such a component, and poisoning rides in through it.
+    MEASURE 2.7 evaluates security and resilience identified in MAP — a
+    query-budget test is how you measure extraction resistance.
+    MANAGE 4.1 is post-deployment monitoring, incident response, and recovery —
+    payload splitting and a host implant are found by watching, not by hoping.
+    GOVERN stopped nothing here by design: it owns the policies, roles, and
+    risk appetite that tell MAP, MEASURE, and MANAGE what to do.
+    Bonus: MANAGE 1.2 prioritizes which lane to fix first by impact and
+    likelihood — the natural next step after naming all four.</pre>
 <p class="eyebrow">Look for</p>
-<ul><li>Four surfaces at four distinct layers: the data <i>before</i> training, the model itself, the request path every user shares, and the machine it all runs on.</li><li>Attack ideas phrased as attacker actions (<i>flip labels</i>, <i>train a surrogate</i>, <i>split the payload</i>), not defenses or vague worries like “hack the AI”.</li><li>At least one attack that works before any prompt is ever sent (the data surface): it proves the sort went past the channel.</li><li>The instructive wrong answer is prompt injection on every surface: use it to ask what an attacker can do before any prompt is ever sent.</li><li>“Steal the API key” belongs on the host or credential store, not the model; bonus to anyone who also marks the tools as part of the channel surface.</li></ul>
+<ul><li>Four surfaces at four distinct layers: the data <i>before</i> training, the model itself, the request path every user shares, and the machine it all runs on.</li><li>Attack ideas phrased as attacker actions (<i>flip labels</i>, <i>train a surrogate</i>, <i>split the payload</i>), not defenses or vague worries like “hack the AI”.</li><li>Every attack anchored to a real subcategory in <code>FUNCTION x.x</code> form (e.g. <code>MAP 4.1</code>), with a reason — not “the RMF says be secure”. Any defensible subcategory earns the point; the anchor existing is the teaching goal.</li><li>At least one attack that works before any prompt is ever sent (the data surface): it proves the sort went past the channel.</li><li>The instructive wrong answer is prompt injection on every surface: use it to ask what an attacker can do before any prompt is ever sent.</li><li>“Steal the API key” belongs on the host or credential store, not the model; bonus to anyone who also marks the tools as part of the channel surface.</li><li>The second instructive moment: GOVERN appears in nobody's line. Draw out that GOVERN contributes policies, roles, and risk appetite rather than a countermeasure — that is the design of the RMF, and it sets up Lab 6.</li></ul>
 </details>
 </div>
 </section>
@@ -323,20 +407,96 @@ is a command; intent, not signature.</pre>
   <div class="dn-card">
 <p class="eyebrow">Lab 5 · Do it now · 5 minutes</p>
 <h3><span class="dn-badge">DN 5</span> What needs a human?</h3>
-<table class="dn-facts"><tr><th>Time</th><td>5 min</td><th>Grouping</th><td>Individual</td></tr><tr><th>Tools</th><td>Mural board, Zoom chat, and a notes file</td><th>Capture</th><td>One Zoom chat line: <code>GATE: A1-auto, A2-human, A3-human, A4-auto, A5-human, A6-human | STAR: A#</code></td></tr><tr><th>Feeds</th><td colspan="3">Part 2's human gate: your <code>auto</code>/<code>human</code> calls become the lab's <code>IRREVERSIBLE_ACTIONS</code> set and the <code>ApprovalQueue</code> that records who approved a <code>wipe</code> or <code>delete</code></td></tr></table>
-<p><b>Goal.</b> Decide which routine SOC actions an agent may run unattended and which must stop for a recorded human decision, by judging reversibility rather than model confidence. Your sort is the draft of the policy set the lab encodes.</p>
-<p><b>Deliverable.</b> One Zoom chat line in the exact format <code>GATE: A1-auto, A2-human, … | STAR: A#</code>, plus six one-line worst cases in your notes file, one per action.</p>
+<table class="dn-facts"><tr><th>Time</th><td>5 min</td><th>Grouping</th><td>Individual</td></tr><tr><th>Tools</th><td>Mural board, Zoom chat, and a notes file</td><th>Capture</th><td><code>GATE: A1-&lt;auto|human&gt;, A2-…, A3-…, A4-…, A5-…, A6-… | STAR: A# because ___</code></td></tr><tr><th>Feeds</th><td colspan="3">Part 2's human gate: your <code>auto</code>/<code>human</code> calls become the lab's <code>IRREVERSIBLE_ACTIONS</code> set and the <code>ApprovalQueue</code> that records who approved a <code>wipe</code> or <code>delete</code></td></tr></table>
+<p><b>Scope.</b> One agent, six actions, one policy. Your SOC is about to put an autonomous incident-response agent into production: it plans a response, executes the steps, and verifies the result on its own — the pipeline drawn below. Before go-live, someone has to write its <b>action policy</b>: of the six actions it can propose, which may run <b>unattended</b> (the AUTO lane) and which must <b>stop and wait for a recorded human decision</b> (the HUMAN lane). That someone is you, and the deciding question is reversibility — <i>if this ran unattended and wrong, could it be undone in seconds?</i> — not how confident the model sounds.</p>
+<p><b>Deliverable.</b> One Zoom chat line in the GATE format below, plus six one-line worst cases in your notes file, one per action.</p>
+<figure class="diagram">
+<div class="scroll">
+<svg viewBox="0 0 960 600" role="img" aria-label="An autonomous incident-response agent: alert, Planner, Executor, Verifier, then a reversibility decision that sends each action either to the AUTO lane, which runs unattended, or the HUMAN lane, which waits for a recorded approval. Six example actions are shown unsorted below.">
+  <!-- the agent pipeline this policy governs -->
+  <rect class="d-node k-data" x="50" y="50" width="120" height="54" rx="8"/>
+  <text class="d-t k-data-t" x="110" y="73" text-anchor="middle">alert</text>
+  <text class="d-sub" x="110" y="91" text-anchor="middle">incoming</text>
+  <rect class="d-node k-step" x="230" y="50" width="130" height="54" rx="8"/>
+  <text class="d-t k-step-t" x="295" y="73" text-anchor="middle">Planner</text>
+  <text class="d-sub" x="295" y="91" text-anchor="middle">drafts the steps</text>
+  <rect class="d-node k-step" x="420" y="50" width="130" height="54" rx="8"/>
+  <text class="d-t k-step-t" x="485" y="73" text-anchor="middle">Executor</text>
+  <text class="d-sub" x="485" y="91" text-anchor="middle">runs the tools</text>
+  <rect class="d-node k-step" x="610" y="50" width="130" height="54" rx="8"/>
+  <text class="d-t k-step-t" x="675" y="73" text-anchor="middle">Verifier</text>
+  <text class="d-sub" x="675" y="91" text-anchor="middle">checks the policy</text>
+  <path class="d-edge" d="M170,77 L230,77"/>
+  <path class="d-edge" d="M360,77 L420,77"/>
+  <path class="d-edge" d="M550,77 L610,77"/>
+
+  <!-- the decision your sort encodes -->
+  <path class="d-edge" d="M675,104 L675,146"/>
+  <polygon class="d-node k-decision" points="675,146 775,192 675,238 575,192"/>
+  <text class="d-t k-decision-t" x="675" y="188" text-anchor="middle">reversible</text>
+  <text class="d-t k-decision-t" x="675" y="205" text-anchor="middle">in seconds?</text>
+
+  <!-- AUTO lane -->
+  <path class="d-edge" d="M575,192 L440,272"/>
+  <text class="d-lbl" x="500" y="224" text-anchor="middle">yes · auto</text>
+  <rect class="d-node k-defend" x="120" y="272" width="320" height="104" rx="10"/>
+  <text class="d-t k-defend-t" x="280" y="299" text-anchor="middle">AUTO lane</text>
+  <text class="d-sub" x="280" y="318" text-anchor="middle">runs unattended · every call logged</text>
+  <rect x="150" y="334" width="260" height="28" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="280" y="353" text-anchor="middle">A# · A# · A# — your sort here</text>
+
+  <!-- HUMAN lane -->
+  <path class="d-edge" d="M775,192 L790,272"/>
+  <text class="d-lbl" x="836" y="224" text-anchor="middle">no · gate it</text>
+  <rect class="d-node k-terminal" x="520" y="272" width="360" height="104" rx="10"/>
+  <text class="d-t k-terminal-t" x="700" y="299" text-anchor="middle">HUMAN lane</text>
+  <text class="d-sub" x="700" y="318" text-anchor="middle">waits for a recorded human decision</text>
+  <rect x="550" y="334" width="300" height="28" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="700" y="353" text-anchor="middle">A# · A# · A# — your sort here</text>
+  <text class="d-note" x="700" y="398" text-anchor="middle">the ApprovalQueue holds the action until a named approver says yes</text>
+
+  <!-- the six actions, unsorted -->
+  <text class="d-bandlabel" x="60" y="446">the six actions the agent can propose</text>
+  <rect class="d-node k-step" x="40" y="462" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="105" y="485" text-anchor="middle">A1</text>
+  <text class="d-sub" x="105" y="503" text-anchor="middle">enrich an alert</text>
+  <rect class="d-node k-step" x="190" y="462" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="255" y="485" text-anchor="middle">A2</text>
+  <text class="d-sub" x="255" y="503" text-anchor="middle">isolate a host</text>
+  <rect class="d-node k-step" x="340" y="462" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="405" y="485" text-anchor="middle">A3</text>
+  <text class="d-sub" x="405" y="503" text-anchor="middle">reset a password</text>
+  <rect class="d-node k-step" x="490" y="462" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="555" y="485" text-anchor="middle">A4</text>
+  <text class="d-sub" x="555" y="503" text-anchor="middle">block an IP</text>
+  <rect class="d-node k-step" x="640" y="462" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="705" y="485" text-anchor="middle">A5</text>
+  <text class="d-sub" x="705" y="503" text-anchor="middle">close a ticket</text>
+  <rect class="d-node k-step" x="790" y="462" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="855" y="485" text-anchor="middle">A6</text>
+  <text class="d-sub" x="855" y="503" text-anchor="middle">wipe a laptop</text>
+
+  <text class="d-note" x="480" y="566" text-anchor="middle">in the lab, the Verifier enforces exactly this sort: HUMAN-lane actions are held until the queue records who approved them</text>
+</svg>
+</div>
+<figcaption>The system your policy governs: an <b>alert</b> flows through the agent's <b>Planner → Executor → Verifier</b> loop, and before any action runs, one question routes it — <i>reversible in seconds?</i> The <b>AUTO lane</b> executes unattended and logs every call; the <b>HUMAN lane</b> parks the action in an approval queue until a named person says yes. Your job in this activity is to sort the six proposed actions (A1-A6) into the two dashed slots. The Mural board shows the same two lanes as empty frames.</figcaption>
+</figure>
+<div class="legend"><span><span class="sw k-step"></span> agent stage / action</span><span><span class="sw k-defend"></span> AUTO lane (unattended)</span><span><span class="sw k-decision"></span> the reversibility decision</span><span>A1-A6: the actions you sort</span></div>
+<div class="callout c-note"><p class="c-title">How to read the capture line</p>
+<p><code>GATE: A1-auto, A2-human, … | STAR: A# because ___</code> is the whole deliverable in one line:</p>
+<ul class="dn-need"><li><code>A1-auto</code> — action A1 may run <b>unattended</b>: the agent executes it and logs the call.</li><li><code>A2-human</code> — the agent must <b>stop</b> before A2, park it in the approval queue, and wait for a recorded human decision.</li><li><code>STAR: A# because ___</code> — the single action whose wrong, unattended run would be <b>hardest to recover from</b>, with your reason.</li></ul>
+<p><b>Worked example</b> (a different action set, so it gives nothing away): if the actions were <i>B1 add a watchlist tag</i>, <i>B2 reboot a mail server</i>, <i>B3 delete the audit archive</i>, a good line would be:<br><code>GATE: B1-auto, B2-auto, B3-human | STAR: B3 because deleted evidence cannot be un-deleted</code><br>B1 changes only metadata and is trivial to fix; B2 interrupts service for minutes but comes back on its own; B3 destroys something no rollback restores — that is the reversibility test doing the sorting.</p></div>
 <h4>You need</h4>
-<ul class="dn-need"><li>Your notes file for the worst-case lines, and the Zoom chat open.</li><li>The Mural board link, posted in the Zoom chat: six sticky notes prepared by the instructor, <code>A1</code> enrich an alert with threat-intel reputation · <code>A2</code> isolate a host from the network · <code>A3</code> reset a user's password · <code>A4</code> block an IP at the firewall · <code>A5</code> close a false-positive ticket · <code>A6</code> wipe a laptop, beside two zones: <b>auto</b> and <b>human</b>.</li><li>If Mural fails: the instructor pastes the six actions as a numbered list in the Zoom chat, and you reply with your GATE line.</li></ul>
+<ul class="dn-need"><li>Your notes file for the worst-case lines, and the Zoom chat open.</li><li>The Mural board link, posted in the Zoom chat: the two lanes from the diagram above as empty frames (<b>AUTO</b> and <b>HUMAN</b>), and six sticky notes prepared by the instructor — <code>A1</code> enrich an alert with threat-intel reputation · <code>A2</code> isolate a host from the network · <code>A3</code> reset a user's password · <code>A4</code> block an IP at the firewall · <code>A5</code> close a false-positive ticket · <code>A6</code> wipe a laptop.</li><li>If Mural fails: the instructor pastes the six actions as a numbered list in the Zoom chat; you sort against the diagram on this page and reply with your GATE line.</li></ul>
 <h4>Steps</h4>
-<div class="tblwrap"><table class="tbl dn-steps"><thead><tr><th>Min</th><th>Step</th></tr></thead><tbody><tr><td class="t">1</td><td><b>Read</b> the six action stickies A1-A6. For each, ask the only question that matters: if this ran unattended and wrong, could it be undone in seconds?</td></tr><tr><td class="t">2</td><td><b>Sort</b> each sticky into the <b>auto</b> or <b>human</b> zone on the board, and write one line in your notes file on the worst case if it ran unattended and wrong.</td></tr><tr><td class="t">1</td><td><b>Star</b> the one action whose unattended worst case is hardest to recover from (a ⭐ or a comment on its sticky), and be ready to defend the call.</td></tr><tr><td class="t">1</td><td><b>Post</b> your line in the Zoom chat: <code>GATE: A1-auto, A2-human, … | STAR: A#</code>. Keep the six worst-case lines in your notes; Part 2 will ask for them.</td></tr></tbody></table></div>
-<div class="dn-done"><p><b>Capture.</b> One Zoom chat line: <code>GATE: A1-auto, A2-human, A3-human, A4-auto, A5-human, A6-human | STAR: A#</code></p><p><b>Done when.</b> All six stickies are zoned, your GATE line is in the Zoom chat, every action has a one-line worst case in your notes, and one action is starred.</p></div>
+<div class="tblwrap"><table class="tbl dn-steps"><thead><tr><th>Min</th><th>Step</th></tr></thead><tbody><tr><td class="t">1</td><td><b>Read</b> the scope and the diagram above, then the six action stickies A1-A6 on the board. For each action, ask the only question that matters: if this ran unattended and wrong, could it be undone in seconds?</td></tr><tr><td class="t">2</td><td><b>Sort</b> each sticky into the <b>AUTO</b> or <b>HUMAN</b> lane on the board, and write one line in your notes file on the worst case if that action ran unattended and wrong.</td></tr><tr><td class="t">1</td><td><b>Star</b> the one action whose unattended worst case is hardest to recover from (a ⭐ or a comment on its sticky), with a one-line reason you can defend out loud.</td></tr><tr><td class="t">1</td><td><b>Post</b> your line in the Zoom chat: <code>GATE: A1-…, A2-…, A3-…, A4-…, A5-…, A6-… | STAR: A# because ___</code>. Keep the six worst-case lines in your notes; Part 2 will ask for them.</td></tr></tbody></table></div>
+<div class="dn-done"><p><b>Capture.</b> <code>GATE: A1-&lt;auto|human&gt;, …, A6-&lt;auto|human&gt; | STAR: A# because ___</code></p><p><b>Done when.</b> All six stickies are zoned, your GATE line is in the Zoom chat with a starred action and its reason, and every action has a one-line worst case in your notes.</p></div>
 <div class="dn-info"><p class="dn-info-title">In the news</p><p><b>Air Canada had to honor a refund policy its chatbot invented.</b> In November 2022, after his grandmother died, Jake Moffatt asked Air Canada's website chatbot about bereavement fares. The bot said he could book at full price and claim a discount within 90 days of travel; the airline's real policy said no such thing. In February 2024, British Columbia's Civil Resolution Tribunal (2024 BCCRT 149) ruled the airline liable for negligent misrepresentation and ordered it to pay Moffatt C$812.02, rejecting the argument that the chatbot was a separate legal entity responsible for its own words. Unattended output still binds the company, which is why some actions need a human before they run. Source: <a href="https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html">CanLII (the ruling itself)</a>.</p></div>
 <p class="dn-pattern"><b>Pattern.</b> <i>Reversibility decides:</i> ask &ldquo;can this be undone in seconds?&rdquo; before asking how confident the model is. <b>Anti-pattern.</b> <i>Gate everything:</i> a human gate on reversible work adds latency until approvers start rubber-stamping, which is worse than no gate.</p>
 <div class="dn-reading"><p class="dn-reading-title">Further reading</p><ul><li><a href="https://csrc.nist.gov/pubs/sp/800/61/r2/final">NIST SP 800-61 Rev. 2, Computer Security Incident Handling Guide</a> (NIST)</li><li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">OWASP Top 10 for LLM Applications (see Excessive Agency)</a> (OWASP)</li><li><a href="https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html">Moffatt v. Air Canada, 2024 BCCRT 149 (full decision)</a> (CanLII)</li></ul></div>
 <details class="dn-answer"><summary>Answer key</summary>
 <p class="eyebrow">Sample answer</p>
-<pre>GATE: A1-auto, A2-auto, A3-human, A4-auto, A5-human, A6-human | STAR: A6
+<pre>GATE: A1-auto, A2-auto, A3-human, A4-auto, A5-human, A6-human | STAR: A6 because a wiped laptop cannot be un-wiped, and the forensic evidence goes with it
     A1 enrich: worst case is a wrong reputation note on the alert; read-only, cheap to correct.
     A2 isolate: the wrong host is cut off (the CFO mid-board-call); embarrassing, but undone in seconds.
     A3 reset: an attacker-triggered reset locks the real user out and gives the account to an attacker.
@@ -344,7 +504,7 @@ is a command; intent, not signature.</pre>
     A5 close: a mis-scored true positive is closed unseen and the intrusion continues with no open ticket.
     A6 wipe: state and forensic evidence are destroyed; irreversible, and the investigation loses the host.</pre>
 <p class="eyebrow">Look for</p>
-<ul><li><code>A1</code>, <code>A2</code>, <code>A4</code> marked <code>auto</code>: reversible, machine-speed actions, the same call the lab makes for quarantine and block.</li><li><code>A6</code> marked <code>human</code>: wiping destroys state and evidence, exactly why the lab gates <code>wipe</code> behind the <code>ApprovalQueue</code>.</li><li><code>A5</code> gated or starred: the instructive miss is calling close-ticket harmless because it &ldquo;changes nothing&rdquo;, when an auto-closed true positive silences a live incident.</li><li><code>A3</code> argued either way, with a worst case on both sides (user lockout vs. attacker-driven reset). The reasoning counts more than the label.</li><li>Worst cases written for all six actions, not only the gated ones: the reversibility question only works when you answer it for everything.</li></ul>
+<ul><li><code>A1</code>, <code>A2</code>, <code>A4</code> marked <code>auto</code>: reversible, machine-speed actions, the same call the lab makes for quarantine and block.</li><li><code>A6</code> marked <code>human</code>: wiping destroys state and evidence, exactly why the lab gates <code>wipe</code> behind the <code>ApprovalQueue</code>.</li><li><code>A5</code> gated or starred: the instructive miss is calling close-ticket harmless because it &ldquo;changes nothing&rdquo;, when an auto-closed true positive silences a live incident.</li><li><code>A3</code> argued either way, with a worst case on both sides (user lockout vs. attacker-driven reset). The reasoning counts more than the label.</li><li>A STAR line with a <i>reason</i>, not just a letter: “hardest to recover from” must point at what is lost — evidence, access, or time.</li><li>Worst cases written for all six actions, not only the gated ones: the reversibility question only works when you answer it for everything.</li></ul>
 </details>
 </div>
 </section>
@@ -353,38 +513,132 @@ is a command; intent, not signature.</pre>
   <div class="dn-card">
 <p class="eyebrow">Lab 6 · Do it now · 5 minutes</p>
 <h3><span class="dn-badge">DN 6</span> Sort by risk tier</h3>
-<table class="dn-facts"><tr><th>Time</th><td>5 min</td><th>Grouping</th><td>Individual</td></tr><tr><th>Tools</th><td>Mural board and Zoom chat</td><th>Capture</th><td><code>SORT: S1-&lt;tier&gt;, S2-&lt;tier&gt;, …, S6-&lt;tier&gt;</code> plus one WHY line per card</td></tr><tr><th>Feeds</th><td colspan="3">Part 1, Classify: the same two questions drive <code>eu_ai_act_tier</code>, and each tier's duty list</td></tr></table>
-<p><b>Goal.</b> Place six AI uses in the EU AI Act tiers (unacceptable / high / limited / minimal) before any code opens, so the lab's classifier has a baseline to be checked against.</p>
-<p><b>Deliverable.</b> Your six-card sort posted in the Zoom chat, each card with a one-line justification that names the rule, not the vibe.</p>
+<table class="dn-facts"><tr><th>Time</th><td>5 min</td><th>Grouping</th><td>Individual</td></tr><tr><th>Tools</th><td>Mural board and Zoom chat; no notebook</td><th>Capture</th><td><code>SORT: S1-&lt;tier&gt;, S2-&lt;tier&gt;, …, S6-&lt;tier&gt; | STAR: S# because ___</code> plus six WHY lines, one rule each</td></tr><tr><th>Feeds</th><td colspan="3">Part 1, Classify: the same two questions drive <code>eu_ai_act_tier</code>, and each tier's duty list — your sort is the baseline the lab's classifier is checked against</td></tr></table>
+<p><b>Scope.</b> Six AI uses, four legal tiers, one ladder of questions. The <a href="https://artificialintelligenceact.eu/high-level-summary/">EU AI Act</a> does not rank systems by how scary they feel; it asks questions in a fixed order, and the first <i>yes</i> sets the tier. Before any code opens, you are the classifier: decide which tier each of the six uses below falls in, so that when the lab's <code>eu_ai_act_tier</code> function runs, your reasoned sort is the baseline its output is checked against. You are also practicing the governance reflex this whole chapter is built on — every AI system your organization runs already has a tier, whether anyone has named it or not.</p>
+<p><b>Deliverable.</b> One Zoom chat line in the SORT format below — all six uses tiered, your least-certain call starred — with six WHY lines beneath it, each naming the rule that placed its card.</p>
+<figure class="diagram">
+<div class="scroll">
+<svg viewBox="0 0 960 680" role="img" aria-label="The EU AI Act tier ladder: an AI use enters three questions in order — prohibited practice under Article 5, Annex III use, then a limited screen for systems that talk to the public or generate content under Article 50. The first yes routes the use to its tier: unacceptable, high, limited, or minimal, each with duties and an empty dashed slot for the sort. Six uses, S1 to S6, wait unsorted below.">
+  <!-- a use enters the ladder -->
+  <rect class="d-node k-data" x="55" y="30" width="140" height="52" rx="8"/>
+  <text class="d-t k-data-t" x="125" y="52" text-anchor="middle">an AI use</text>
+  <text class="d-sub" x="125" y="70" text-anchor="middle">one of S1–S6, below</text>
+  <path class="d-edge" d="M125,82 L125,116"/>
+  <text class="d-lbl" x="148" y="104">classify</text>
+
+  <!-- Q1: prohibited? -->
+  <polygon class="d-node k-decision" points="125,116 235,160 125,204 15,160"/>
+  <text class="d-t k-decision-t" x="125" y="152" text-anchor="middle">prohibited</text>
+  <text class="d-t k-decision-t" x="125" y="169" text-anchor="middle">practice? · Art. 5</text>
+
+  <!-- Q2: Annex III? -->
+  <path class="d-edge" d="M125,204 L125,236"/>
+  <text class="d-lbl" x="145" y="226">no</text>
+  <polygon class="d-node k-decision" points="125,236 235,280 125,324 15,280"/>
+  <text class="d-t k-decision-t" x="125" y="272" text-anchor="middle">Annex III</text>
+  <text class="d-t k-decision-t" x="125" y="289" text-anchor="middle">use?</text>
+
+  <!-- Q3: the limited screen -->
+  <path class="d-edge" d="M125,324 L125,356"/>
+  <text class="d-lbl" x="145" y="346">no</text>
+  <polygon class="d-node k-decision" points="125,356 245,400 125,444 5,400"/>
+  <text class="d-t k-decision-t" x="125" y="392" text-anchor="middle">talks to the public</text>
+  <text class="d-t k-decision-t" x="125" y="409" text-anchor="middle">or generates?</text>
+
+  <!-- tier: unacceptable -->
+  <path class="d-edge" d="M235,160 L560,160"/>
+  <text class="d-lbl" x="398" y="150" text-anchor="middle">yes · banned</text>
+  <rect class="d-node k-attack" x="560" y="118" width="380" height="84" rx="10"/>
+  <text class="d-t k-attack-t" x="750" y="140" text-anchor="middle">UNACCEPTABLE</text>
+  <text class="d-sub" x="750" y="158" text-anchor="middle">prohibited practice · may not be placed on the market</text>
+  <rect x="600" y="168" width="300" height="24" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="750" y="184" text-anchor="middle">S# · S# · … — your sort here</text>
+
+  <!-- tier: high -->
+  <path class="d-edge" d="M235,280 L560,280"/>
+  <text class="d-lbl" x="398" y="270" text-anchor="middle">yes · full duties</text>
+  <rect class="d-node k-decision" x="560" y="238" width="380" height="84" rx="10"/>
+  <text class="d-t k-decision-t" x="750" y="260" text-anchor="middle">HIGH</text>
+  <text class="d-sub" x="750" y="278" text-anchor="middle">Annex III use → logging · human oversight · conformity</text>
+  <rect x="600" y="288" width="300" height="24" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="750" y="304" text-anchor="middle">S# · S# · … — your sort here</text>
+
+  <!-- tier: limited -->
+  <path class="d-edge" d="M245,400 L560,400"/>
+  <text class="d-lbl" x="400" y="390" text-anchor="middle">yes · Art. 50</text>
+  <rect class="d-node k-terminal" x="560" y="358" width="380" height="84" rx="10"/>
+  <text class="d-t k-terminal-t" x="750" y="380" text-anchor="middle">LIMITED</text>
+  <text class="d-sub" x="750" y="398" text-anchor="middle">transparency duties: disclose it is AI · label the content</text>
+  <rect x="600" y="408" width="300" height="24" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="750" y="424" text-anchor="middle">S# · S# · … — your sort here</text>
+
+  <!-- tier: minimal (the ladder runs out) -->
+  <path class="d-edge" d="M125,444 L125,520 L560,520"/>
+  <text class="d-lbl" x="342" y="508" text-anchor="middle">no · everything else</text>
+  <rect class="d-node k-defend" x="560" y="478" width="380" height="84" rx="10"/>
+  <text class="d-t k-defend-t" x="750" y="500" text-anchor="middle">MINIMAL</text>
+  <text class="d-sub" x="750" y="518" text-anchor="middle">the ladder ran out · no AI-Act-specific duties</text>
+  <rect x="600" y="528" width="300" height="24" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="750" y="544" text-anchor="middle">S# · S# · … — your sort here</text>
+
+  <!-- the six uses, unsorted -->
+  <text class="d-bandlabel" x="40" y="568">the six uses to sort — drag each onto a tier</text>
+  <rect class="d-node k-step" x="40" y="584" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="105" y="607" text-anchor="middle">S1</text>
+  <text class="d-sub" x="105" y="625" text-anchor="middle">a spam filter</text>
+  <rect class="d-node k-step" x="190" y="584" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="255" y="607" text-anchor="middle">S2</text>
+  <text class="d-sub" x="255" y="625" text-anchor="middle">ranks job CVs</text>
+  <rect class="d-node k-step" x="340" y="584" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="405" y="607" text-anchor="middle">S3</text>
+  <text class="d-sub" x="405" y="625" text-anchor="middle">deepfake generator</text>
+  <rect class="d-node k-step" x="490" y="584" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="555" y="607" text-anchor="middle">S4</text>
+  <text class="d-sub" x="555" y="625" text-anchor="middle">medical triage bot</text>
+  <rect class="d-node k-step" x="640" y="584" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="705" y="607" text-anchor="middle">S5</text>
+  <text class="d-sub" x="705" y="625" text-anchor="middle">a game NPC</text>
+  <rect class="d-node k-step" x="790" y="584" width="130" height="56" rx="8"/>
+  <text class="d-t k-step-t" x="855" y="607" text-anchor="middle">S6</text>
+  <text class="d-sub" x="855" y="625" text-anchor="middle">reads emotions</text>
+
+  <text class="d-note" x="480" y="668" text-anchor="middle">in the lab, eu_ai_act_tier runs this same ladder — your sort here is the baseline its output is checked against</text>
+</svg>
+</div>
+<figcaption>The mechanism the whole activity runs on: one ladder of questions, asked in a fixed order. <b>Prohibited practice (Art. 5)?</b> A yes bans the system outright — unacceptable. <b>Annex III use?</b> A yes makes it high-risk, with logging, human oversight, and conformity duties. If both answers are no, one screen remains: <b>does it interact with people or generate content (Art. 50)?</b> That is limited, with transparency duties; anything left is minimal. The first yes sets the tier, and the tier sets the duties. The six uses S1-S6 wait below — your job is to drag each into one of the dashed slots, which are deliberately empty.</figcaption>
+</figure>
+<div class="legend"><span><span class="sw k-data"></span> a use entering the ladder</span><span><span class="sw k-decision"></span> a ladder question</span><span><span class="sw k-attack"></span> banned tier</span><span><span class="sw k-defend"></span> minimal tier</span><span>S1-S6: the uses you sort onto the dashed slots</span></div>
+<div class="callout c-note"><p class="c-title">How to read the capture line</p>
+<p><code>SORT: S1-&lt;tier&gt;, S2-&lt;tier&gt;, …, S6-&lt;tier&gt; | STAR: S# because ___</code> is the deliverable's first line, with six WHY lines beneath it:</p>
+<ul class="dn-need"><li><code>S2-&lt;tier&gt;</code> — one tier per card, and the tier must be one of exactly four words: <code>unacceptable</code>, <code>high</code>, <code>limited</code>, or <code>minimal</code>. No hyphens, no “medium”.</li><li><code>STAR: S# because ___</code> — the single card whose tier you are least sure of, with the reason for your doubt.</li><li>The WHY lines — one per card, each naming the <b>rule</b> that placed it: Art. 5, an Annex III use, Art. 50, or “the ladder ran out at minimal”. A severity feeling is not a rule.</li></ul>
+<p><b>Worked example</b> (a different use set, so it gives nothing away): if the cards were <i>B1 a playlist recommender on the company intranet</i>, <i>B2 a city-hall chatbot that answers residents' questions</i>, <i>B3 a public-authority system scoring citizens' trustworthiness for access to housing</i>, a good post would be:<br><code>SORT: B1-minimal, B2-limited, B3-unacceptable | STAR: B2 because serving residents felt like more than a transparency duty</code><br><code>WHY B1: not prohibited, not Annex III, no public content — the ladder runs out at minimal.</code><br><code>WHY B2: it interacts with people, so Art. 50 says they must be told it is a machine.</code><br><code>WHY B3: social scoring by public authorities is named a prohibited practice in Art. 5.</code><br>Notice the ladder doing the work: B3 never reaches the Annex III question, because the first yes already set its tier.</p></div>
 <h4>You need</h4>
-<ul class="dn-need"><li>The Mural board link, posted in the Zoom chat: four tier frames in order, <b>unacceptable</b> (prohibited practice, Art. 5) → <b>high</b> (Annex III use) → <b>limited</b> (interacts with people or generates content, Art. 50) → <b>minimal</b> (everything else).</li><li>Six sticky notes on the board, S1-S6, prepared by the instructor: <b>S1</b> a spam filter on the company mailbox · <b>S2</b> an agent that screens job applicants and ranks CVs · <b>S3</b> a deepfake video generator · <b>S4</b> a medical-triage chatbot that directs patients to care · <b>S5</b> a game NPC that patrols a level · <b>S6</b> a webcam agent that reads employees' emotions to flag unhappy staff.</li><li>If Mural fails: the instructor pastes the tier ladder and the six cards as a numbered list in the Zoom chat, and you reply with your sort line.</li></ul>
+<ul class="dn-need"><li>The Mural board link, posted in the Zoom chat: four tier frames in ladder order, prepared by the instructor:<ul><li><b>unacceptable</b> — a prohibited practice (<a href="https://artificialintelligenceact.eu/article/5/">Art. 5</a>): banned outright.</li><li><b>high</b> — an <a href="https://artificialintelligenceact.eu/annex/3/">Annex III</a> use: full duties (logging, human oversight, conformity assessment).</li><li><b>limited</b> — interacts with people or generates content (Art. 50): transparency duties.</li><li><b>minimal</b> — everything else: no AI-Act-specific duties.</li></ul></li><li>Six sticky notes on the board, S1-S6, prepared by the instructor:<ul><li><b>S1</b> a spam filter on the company mailbox.</li><li><b>S2</b> an agent that screens job applicants and ranks CVs.</li><li><b>S3</b> a deepfake video generator.</li><li><b>S4</b> a medical-triage chatbot that directs patients to care.</li><li><b>S5</b> a game NPC that patrols a level.</li><li><b>S6</b> a webcam agent that reads employees' emotions to flag unhappy staff.</li></ul></li><li>The Zoom chat open for your sort line and six WHY lines.</li><li>If Mural fails: the instructor pastes the tier ladder and the six cards as a numbered list in the Zoom chat; you sort against the diagram on this page and reply with your SORT line.</li></ul>
 <h4>Steps</h4>
-<div class="tblwrap"><table class="tbl dn-steps"><thead><tr><th>Min</th><th>Step</th></tr></thead><tbody><tr><td class="t">1</td><td><b>Read</b> the tier frames and cards S1-S6. For each card, ask the two questions in order: <i>is this a prohibited practice?</i> then <i>is it an Annex III use?</i> The first yes sets the tier.</td></tr><tr><td class="t">2</td><td><b>Sort</b> each sticky into a tier frame. If neither question is yes, ask whether it talks to the public or generates content (limited); otherwise it is minimal.</td></tr><tr><td class="t">1</td><td><b>Justify</b> each card with a comment or small sticky: one line naming the rule that placed it, for example <code>S2: employment is an Annex III use</code>, not <code>S2: feels risky</code>.</td></tr><tr><td class="t">1</td><td><b>Post</b> your line in the Zoom chat: <code>SORT: S1-minimal, S2-high, …</code> with your six WHY lines beneath it. Star the card you are least sure about.</td></tr></tbody></table></div>
-<div class="dn-done"><p><b>Capture.</b> <code>SORT: S1-&lt;tier&gt;, S2-&lt;tier&gt;, …, S6-&lt;tier&gt;</code> plus one WHY line per card</p><p><b>Done when.</b> All six stickies carry a tier and a one-line why that names a rule, and your sort is in the Zoom chat.</p></div>
+<div class="tblwrap"><table class="tbl dn-steps"><thead><tr><th>Min</th><th>Step</th></tr></thead><tbody><tr><td class="t">1</td><td><b>Read</b> the ladder in the diagram above, then the six cards S1-S6 on the board. For each card, ask the two questions in order: <i>is this a prohibited practice?</i> then <i>is it an Annex III use?</i> The first yes sets the tier.</td></tr><tr><td class="t">2</td><td><b>Sort</b> each sticky into a tier frame. If both answers are no, run the limited screen: does it interact with the public or generate content? Yes → <b>limited</b>; no → <b>minimal</b>. Commit to one tier per card: no blanks, no “somewhere between”.</td></tr><tr><td class="t">1</td><td><b>Justify</b> every card with a comment or small sticky: one WHY line naming the rule that placed it. Shape: <code>B3: social scoring is named in Art. 5</code> — not <code>B3: feels creepy</code>.</td></tr><tr><td class="t">1</td><td><b>Post</b> your line in the Zoom chat — <code>SORT: S1-&lt;tier&gt;, S2-&lt;tier&gt;, …, S6-&lt;tier&gt; | STAR: S# because ___</code> — with your six WHY lines beneath it, starring the card you are least sure about.</td></tr></tbody></table></div>
+<div class="dn-done"><p><b>Capture.</b> <code>SORT: S1-&lt;tier&gt;, S2-&lt;tier&gt;, …, S6-&lt;tier&gt; | STAR: S# because ___</code> plus six WHY lines, one rule each</p><p><b>Done when.</b> All six stickies sit in a tier frame, each carries a WHY line that names a rule, and your SORT line with its starred card and reason is in the Zoom chat.</p></div>
 <div class="dn-info"><p class="dn-info-title">In the news</p><p><b>The EU AI Act's bans have real deadlines, and some have passed.</b> Regulation (EU) 2024/1689 entered into force on 1 August 2024, and it applies in stages. The bans on prohibited practices, including the workplace emotion recognition on card S6, have been enforceable since 2 February 2025, and obligations for general-purpose AI models since 2 August 2025. Breaching a prohibition can cost up to 35 million euros or 7% of global turnover. So the tiers you are sorting into are not academic: each one already carries, or is about to carry, legal duties. Source: <a href="https://ec.europa.eu/commission/presscorner/detail/en/ip_24_4123">European Commission</a>.</p></div>
 <p class="dn-pattern"><b>Pattern.</b> <i>Two questions, in order:</i> prohibited? then Annex III? The first yes sets the tier, and the tier sets the duties. <b>Anti-pattern.</b> <i>Sorting by vibes:</i> ranking uses by how scary they feel instead of by the Act's questions. Every wrong answer above comes from skipping the questions.</p>
-<div class="dn-reading"><p class="dn-reading-title">Further reading</p><ul><li><a href="https://artificialintelligenceact.eu/high-level-summary/">EU AI Act: high-level summary</a> (artificialintelligenceact.eu)</li><li><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai">Regulatory framework for AI (official overview and timeline)</a> (European Commission)</li><li><a href="https://www.nist.gov/itl/ai-risk-management-framework">AI Risk Management Framework</a> (NIST)</li></ul></div>
+<div class="dn-reading"><p class="dn-reading-title">Further reading</p><ul><li><b>The Act and official frameworks</b><ul><li><a href="https://artificialintelligenceact.eu/high-level-summary/">EU AI Act: high-level summary</a> (artificialintelligenceact.eu)</li><li><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai">Regulatory framework for AI — official overview and application timeline</a> (European Commission)</li><li><a href="https://www.nist.gov/itl/ai-risk-management-framework">AI Risk Management Framework — the voluntary counterpart to the Act's legal duties</a> (NIST)</li></ul></li><li><b>Incidents and case studies</b><ul><li><a href="https://en.wikipedia.org/wiki/Dutch_childcare_benefits_scandal">The Dutch childcare benefits scandal — a ranking algorithm that destroyed thousands of lives, and a touchstone in the Act's drafting</a> (Wikipedia)</li><li><a href="https://www.propublica.org/article/how-cigna-saves-millions-by-having-its-doctors-reject-claims-without-reading-them">How Cigna used an algorithm to reject health claims in bulk — why triage and access-to-care systems land in high tiers</a> (ProPublica)</li><li><a href="https://www.eeoc.gov/ai">AI and algorithmic fairness in hiring — the regulator's view of CV-screening tools like S2</a> (U.S. EEOC)</li></ul></li><li><b>Guides and tooling</b><ul><li><a href="https://artificialintelligenceact.eu/assessment/eu-ai-act-compliance-checker/">EU AI Act compliance checker — run a system through the same ladder you just used</a> (artificialintelligenceact.eu)</li><li><a href="https://csrc.nist.gov/pubs/sp/800/207/final">NIST SP 800-207, Zero Trust Architecture — the zero-trust half of this lab</a> (NIST)</li><li><a href="https://csrc.nist.gov/pubs/ai/600/1/final">NIST AI 600-1, Generative AI Profile — risks and actions for generative systems like S3</a> (NIST)</li></ul></li></ul></div>
 <details class="dn-answer"><summary>Answer key</summary>
 <p class="eyebrow">Sample answer</p>
-<pre>S1-minimal   internal mail filtering; no AI-Act-specific duties
-    S2-high      employment / worker selection is an Annex III use
-    S3-limited   generates synthetic content: Art. 50 labelling duty
-    S4-high      triage affects access to essential (health) services: Annex III
-    S5-minimal   in-game pathfinding; no public interaction, no generated content
-    S6-unacceptable  workplace emotion recognition is a prohibited practice (Art. 5)
+<pre>SORT: S1-minimal, S2-high, S3-limited, S4-high, S5-minimal, S6-unacceptable
+STAR: S3 because it feels banned, but the Act bans practices, not generators
 
-    S1: not prohibited, not Annex III, no public-facing content; the ladder runs out at minimal.
-    S2: picking people for work is named in Annex III, so duties follow: logging, human
-    oversight, conformity assessment.
-    S3: the Act bans prohibited uses, not generators; a deepfake tool carries Art. 50
-    disclosure duties.
-    S4: steering patients steers access to an essential service, which is Annex III
-    territory; &quot;only advice&quot; changes nothing.
-    S5: no interaction with the public, no generated content, no Annex III use.
-    S6: inferring emotions in the workplace is banned outright; no tier below
-    unacceptable applies.</pre>
+WHY S1: not prohibited, not Annex III, no public-facing content; the ladder
+runs out at minimal.
+WHY S2: selecting people for work is named in Annex III, so duties follow —
+logging, human oversight, conformity assessment.
+WHY S3: it generates synthetic content, so Art. 50 labelling applies; the Act
+bans uses, not generators.
+WHY S4: steering patients steers access to essential health services, which is
+Annex III territory; &quot;only advice&quot; changes nothing.
+WHY S5: in-game pathfinding; no interaction with the public, no generated
+content, no Annex III use.
+WHY S6: inferring employees' emotions in the workplace is a prohibited
+practice (Art. 5); no tier below unacceptable applies.</pre>
 <p class="eyebrow">Look for</p>
-<ul><li>S6 unacceptable with the <i>rule</i> named (workplace emotion recognition, Art. 5), not just &ldquo;creepy&rdquo;, and the contrast that plain productivity monitoring would have been high.</li><li>S3 limited, not unacceptable: a deepfake tool carries Art. 50 disclosure duties unless it is used for a prohibited practice.</li><li>S4 high despite sounding harmless: triage steers access to essential health services, which is Annex III territory.</li><li>Every WHY line cites a rule (Art. 5, Annex III, Art. 50) rather than a severity feeling.</li><li>S2 and S4 high with at least one duty anticipated (logging, human oversight, conformity assessment), which is the list Part 1 prints.</li></ul>
+<ul><li>S6 unacceptable with the <i>rule</i> named (workplace emotion recognition, Art. 5), not just &ldquo;creepy&rdquo; — and the contrast that plain productivity monitoring, without emotion inference, would have been high instead.</li><li>S3 limited, not unacceptable: a deepfake tool carries Art. 50 disclosure duties unless it is used for a prohibited practice. The Act bans uses, not generators.</li><li>S4 high despite sounding harmless: triage steers access to essential health services, which is Annex III territory.</li><li>Every WHY line cites a rule rather than a severity feeling:<ul><li>Art. 5 for prohibited practices (S6).</li><li>Annex III for named high-risk uses (S2, S4).</li><li>Art. 50 for transparency duties (S3), or “the ladder ran out” for minimal (S1, S5).</li></ul></li><li>S2 and S4 high with at least one duty anticipated (logging, human oversight, conformity assessment) — that duty list is exactly what Part 1's <code>eu_ai_act_tier</code> prints per tier.</li><li>A STAR with a reason, not just a letter: a good star shows the ladder working, for example starring S3 or S4 precisely because the tier the questions produced was surprising.</li></ul>
 </details>
 </div>
 </section>
@@ -393,17 +647,99 @@ is a command; intent, not signature.</pre>
   <div class="dn-card">
 <p class="eyebrow">Lab 7 · Do it now · 5 minutes</p>
 <h3><span class="dn-badge">DN 7</span> Score your own shop</h3>
-<table class="dn-facts"><tr><th>Time</th><td>5 min</td><th>Grouping</th><td>Individual</td></tr><tr><th>Tools</th><td>Mural board, Zoom chat, and a notes file</td><th>Capture</th><td><code>SCORE: inv-# data-# adv-# def-# gov-# mon-# | FIRST: &lt;domain&gt; because &lt;reason&gt;</code></td></tr><tr><th>Feeds</th><td colspan="3">Part 5, Assess your own program: today's 0-2 quick score becomes your evidence-based 0-4 scoring in <code>MY_SCORES</code>, and your FIRST pick is tested against the what-if analysis in Part 3.</td></tr></table>
-<p><b>Goal.</b> Give yourself an honest baseline on six agentic-security domains before the lab formalizes the scoring, and practice the question the capstone is built around: not where the biggest gap is, but which single fix moves you most.</p>
-<p><b>Deliverable.</b> One Zoom chat line with six 0-2 scores and one FIRST pick with a reason, plus the same line saved in your notes for Part 5.</p>
+<table class="dn-facts"><tr><th>Time</th><td>5 min</td><th>Grouping</th><td>Individual</td></tr><tr><th>Tools</th><td>Mural board, Zoom chat, and a notes file</td><th>Capture</th><td><code>SCORE: inv-# data-# adv-# def-# gov-# mon-# | FIRST: &lt;domain&gt; because &lt;reason&gt;</code></td></tr><tr><th>Feeds</th><td colspan="3">Part 5, Assess your own program: today's 0-2 quick score becomes your evidence-based 0-4 scoring in <code>MY_SCORES</code>, and your FIRST pick is tested against the what-if analysis in Part 3</td></tr></table>
+<p><b>Scope.</b> Your shop, six domains, one first move. The capstone lab ends by assessing a real agentic-security program — yours. Before the lab formalizes the scoring (a 0-4 evidence rubric with a governance gate), this opener puts your honest baseline on paper: score your own organization on the six domains below, each on a quick 0/1/2 scale, then answer the question the whole course builds toward — not <i>where is the biggest gap?</i> but <i>which single fix moves you most?</i> The six domains are the course in one row: what you run (<a href="https://www.nist.gov/itl/ai-risk-management-framework">the AI RMF's MAP function</a>), what your agents can touch (data controls), whether you attack yourself before someone else does (adversarial testing, <a href="https://atlas.mitre.org/">MITRE ATLAS</a> territory), whether one failure is survivable (layered defenses), who answers for the agents (governance), and whether you would notice when one misbehaves (monitoring). You are deciding two things: six scores you can defend with artifacts, and the one domain you would fix first.</p>
+<p><b>Deliverable.</b> One Zoom chat line with six 0-2 scores in the fixed order and one FIRST pick with a reason, plus the same line saved in your notes under <code>DN7 BASELINE</code> for Part 5.</p>
+<figure class="diagram">
+<div class="scroll">
+<svg viewBox="0 0 960 620" role="img" aria-label="A three-rung scoring rubric (0 not in place, 1 partial or ad hoc, 2 in place with evidence) feeds six domains of an agentic-security program — inventory, data controls, adversarial testing, layered defenses, governance, monitoring — each with an empty dashed slot for your score. All six feed a decision diamond asking which single fix moves you most, leading to an empty dashed FIRST slot.">
+  <!-- the rubric: three rungs, evidence decides -->
+  <text class="d-bandlabel" x="140" y="34">the rubric · three rungs, evidence decides</text>
+  <rect class="d-node k-terminal" x="140" y="46" width="200" height="46" rx="8"/>
+  <text class="d-t k-terminal-t" x="240" y="66" text-anchor="middle">0 · not in place</text>
+  <text class="d-sub" x="240" y="84" text-anchor="middle">no artifact exists</text>
+  <rect class="d-node k-terminal" x="380" y="46" width="200" height="46" rx="8"/>
+  <text class="d-t k-terminal-t" x="480" y="66" text-anchor="middle">1 · partial or ad hoc</text>
+  <text class="d-sub" x="480" y="84" text-anchor="middle">exists, but you can't show it</text>
+  <rect class="d-node k-terminal" x="620" y="46" width="200" height="46" rx="8"/>
+  <text class="d-t k-terminal-t" x="720" y="66" text-anchor="middle">2 · in place</text>
+  <text class="d-sub" x="720" y="84" text-anchor="middle">you can point to the artifact</text>
+  <path class="d-edge" d="M340,69 L380,69"/>
+  <path class="d-edge" d="M580,69 L620,69"/>
+  <text class="d-note" x="480" y="112" text-anchor="middle">honesty rule: if you can't point to the artifact — the list, the test report, the log — score the rung below</text>
+
+  <!-- the six domains of an agentic-security program -->
+  <rect class="d-band" x="30" y="128" width="900" height="284" rx="12"/>
+  <text class="d-bandlabel" x="54" y="156">your agentic-security program · six domains to score</text>
+  <path class="d-edge" d="M480,119 L480,172"/>
+  <text class="d-lbl" x="496" y="140">score each domain 0 / 1 / 2</text>
+
+  <rect class="d-node k-step" x="60" y="172" width="260" height="104" rx="8"/>
+  <text class="d-t k-step-t" x="190" y="198" text-anchor="middle">inventory</text>
+  <text class="d-sub" x="190" y="218" text-anchor="middle">every agent listed, with what it can reach</text>
+  <rect x="80" y="234" width="220" height="28" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="190" y="253" text-anchor="middle">score 0 / 1 / 2 — yours</text>
+
+  <rect class="d-node k-step" x="350" y="172" width="260" height="104" rx="8"/>
+  <text class="d-t k-step-t" x="480" y="198" text-anchor="middle">data controls</text>
+  <text class="d-sub" x="480" y="218" text-anchor="middle">agents' reads and sends are bounded</text>
+  <rect x="370" y="234" width="220" height="28" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="480" y="253" text-anchor="middle">score 0 / 1 / 2 — yours</text>
+
+  <rect class="d-node k-step" x="640" y="172" width="260" height="104" rx="8"/>
+  <text class="d-t k-step-t" x="770" y="198" text-anchor="middle">adversarial testing</text>
+  <text class="d-sub" x="770" y="218" text-anchor="middle">agents probed before go-live</text>
+  <rect x="660" y="234" width="220" height="28" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="770" y="253" text-anchor="middle">score 0 / 1 / 2 — yours</text>
+
+  <rect class="d-node k-step" x="60" y="292" width="260" height="104" rx="8"/>
+  <text class="d-t k-step-t" x="190" y="318" text-anchor="middle">layered defenses</text>
+  <text class="d-sub" x="190" y="338" text-anchor="middle">no single failure is fatal</text>
+  <rect x="80" y="354" width="220" height="28" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="190" y="373" text-anchor="middle">score 0 / 1 / 2 — yours</text>
+
+  <rect class="d-node k-step" x="350" y="292" width="260" height="104" rx="8"/>
+  <text class="d-t k-step-t" x="480" y="318" text-anchor="middle">governance</text>
+  <text class="d-sub" x="480" y="338" text-anchor="middle">an audit trail of agent actions</text>
+  <rect x="370" y="354" width="220" height="28" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="480" y="373" text-anchor="middle">score 0 / 1 / 2 — yours</text>
+
+  <rect class="d-node k-step" x="640" y="292" width="260" height="104" rx="8"/>
+  <text class="d-t k-step-t" x="770" y="318" text-anchor="middle">monitoring</text>
+  <text class="d-sub" x="770" y="338" text-anchor="middle">behavior logged and reviewed</text>
+  <rect x="660" y="354" width="220" height="28" rx="8" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-sub" x="770" y="373" text-anchor="middle">score 0 / 1 / 2 — yours</text>
+
+  <!-- the FIRST decision -->
+  <path class="d-edge" d="M480,412 L300,462"/>
+  <polygon class="d-node k-decision" points="280,468 430,516 280,564 130,516"/>
+  <text class="d-t k-decision-t" x="280" y="510" text-anchor="middle">which ONE fix</text>
+  <text class="d-t k-decision-t" x="280" y="528" text-anchor="middle">moves you most?</text>
+
+  <path class="d-edge" d="M430,516 L540,516"/>
+  <text class="d-lbl" x="485" y="506" text-anchor="middle">name it</text>
+  <rect x="540" y="478" width="360" height="76" rx="10" style="fill:none;stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:5 4"/>
+  <text class="d-t" x="720" y="508" text-anchor="middle">FIRST — your pick here</text>
+  <text class="d-sub" x="720" y="528" text-anchor="middle">one domain + why: risk or evidence, not convenience</text>
+
+  <text class="d-note" x="480" y="600" text-anchor="middle">the lowest score is a candidate, not an automatic FIRST — the lab's what-if analysis will test your pick</text>
+</svg>
+</div>
+<figcaption>The program you are scoring: six domains inside one boundary, each measured against the same three-rung rubric — <b>0</b> not in place, <b>1</b> partial or ad hoc, <b>2</b> in place with evidence you can point to. Every domain gets one score in its dashed slot; then a single question turns six scores into a decision — <i>which ONE fix moves you most?</i> — and your answer goes in the dashed FIRST slot with its reason. The Mural board carries the same six domain stickies and the rubric.</figcaption>
+</figure>
+<div class="legend"><span><span class="sw k-terminal"></span> rubric rung</span><span><span class="sw k-step"></span> domain to score</span><span><span class="sw k-decision"></span> the FIRST decision</span><span>dashed slots — your scores here</span></div>
+<div class="callout c-note"><p class="c-title">How to read the capture line</p>
+<p><code>SCORE: inv-# data-# adv-# def-# gov-# mon-# | FIRST: &lt;domain&gt; because &lt;reason&gt;</code> is the whole deliverable in one line:</p>
+<ul class="dn-need"><li><code>inv-#</code> … <code>mon-#</code> — six scores, one per domain, always in this fixed order: <b>inv</b>entory, <b>data</b> controls, <b>adv</b>ersarial testing, layered <b>def</b>enses, <b>gov</b>ernance, <b>mon</b>itoring. Each <code>#</code> is a single digit: 0, 1, or 2.</li><li><code>|</code> — separates the scores from the decision they lead to.</li><li><code>FIRST: &lt;domain&gt; because &lt;reason&gt;</code> — exactly one domain, with a reason tied to risk or evidence, not to what would be easiest.</li></ul>
+<p><b>Worked example</b> (a different org, so it gives nothing away): scoring <i>Northwind Clinic, 60 staff, one patient-scheduling chatbot, no security team</i>, a good line would be:<br><code>SCORE: inv-0 data-1 adv-0 def-1 gov-0 mon-1 | FIRST: inv because you cannot protect agents you cannot list</code><br>The <code>inv-0</code> is honest because nobody has ever written the list; <code>mon-1</code> because the chatbot platform keeps logs but nobody reads them — the artifact (the log) exists, the practice does not; and FIRST goes to inventory because every other domain's work starts from knowing what agents exist and what they can reach.</p></div>
 <h4>You need</h4>
-<ul class="dn-need"><li>Your notes file, open to a new heading <code>DN7 BASELINE</code>.</li><li>A target to score: your own team or organization, or the fictional org sticky on the Mural board (for example: <i>Acme Analytics, 200 staff, two LLM copilots in production, no one owns AI security</i>).</li><li>The Mural board link, posted in the Zoom chat: six domain stickies and the 0/1/2 rubric, prepared by the instructor: <b>inventory</b> (you can list every AI agent and what it can reach), <b>data controls</b> (what agents may read and send is bounded), <b>adversarial testing</b> (agents are probed before go-live), <b>layered defenses</b> (no single control failure is fatal), <b>governance</b> (an audit trail of agent actions exists), <b>monitoring</b> (agent behavior is logged and reviewed). Score each <b>0</b> = not in place, <b>1</b> = partial or ad hoc, <b>2</b> = in place and you can show the evidence.</li><li>If Mural fails: the instructor pastes the six domains and the rubric as a numbered list in the Zoom chat, and you reply with your SCORE line.</li></ul>
+<ul class="dn-need"><li>Your notes file, open to a new heading <code>DN7 BASELINE</code>, and the Zoom chat open.</li><li>A target to score — one of:<ul><li>your own team or organization, if you know it well enough to be honest about it, or</li><li>the fictional org sticky on the Mural board: <i>Acme Analytics, 200 staff, two LLM copilots in production, no one owns AI security</i>.</li></ul></li><li>The Mural board link, posted in the Zoom chat: six domain stickies and the 0/1/2 rubric, prepared by the instructor —<ul><li><b>inventory</b> — you can list every AI agent and what it can reach</li><li><b>data controls</b> — what agents may read and send is bounded</li><li><b>adversarial testing</b> — agents are probed before go-live</li><li><b>layered defenses</b> — no single control failure is fatal</li><li><b>governance</b> — an audit trail of agent actions exists</li><li><b>monitoring</b> — agent behavior is logged and reviewed</li><li>rubric: <b>0</b> = not in place · <b>1</b> = partial or ad hoc · <b>2</b> = in place and you can show the evidence</li></ul></li><li>If Mural fails: the instructor pastes the six domains and the rubric as a numbered list in the Zoom chat, and you reply with your SCORE line.</li></ul>
 <h4>Steps</h4>
-<div class="tblwrap"><table class="tbl dn-steps"><thead><tr><th>Min</th><th>Step</th></tr></thead><tbody><tr><td class="t">1</td><td><b>Pick</b> your target: your own shop if you know it well enough, otherwise the fictional org sticky. Read the six domain stickies once through.</td></tr><tr><td class="t">2</td><td><b>Score</b> all six domains 0, 1, or 2 in your notes file, in the order given: inventory, data controls, adversarial testing, layered defenses, governance, monitoring. The honesty rule: if you cannot point to the artifact (the list, the test report, the log), score the level below.</td></tr><tr><td class="t">1</td><td><b>Pick</b> your FIRST: the single domain where one step of improvement would most improve your posture. Add a comment on its sticky or write one line in your notes saying why, tied to risk or evidence, not to what would be easiest.</td></tr><tr><td class="t">1</td><td><b>Post</b> your line in the Zoom chat in the exact format, and copy it into your notes under <code>DN7 BASELINE</code>: <code>SCORE: inv-# data-# adv-# def-# gov-# mon-# | FIRST: &lt;domain&gt; because &lt;reason&gt;</code>.</td></tr></tbody></table></div>
-<div class="dn-done"><p><b>Capture.</b> <code>SCORE: inv-# data-# adv-# def-# gov-# mon-# | FIRST: &lt;domain&gt; because &lt;reason&gt;</code></p><p><b>Done when.</b> Your line is in the Zoom chat with six scores and exactly one FIRST domain with a reason, and the same line is saved in your notes for Part 5.</p></div>
+<div class="tblwrap"><table class="tbl dn-steps"><thead><tr><th>Min</th><th>Step</th></tr></thead><tbody><tr><td class="t">1</td><td><b>Pick</b> your target: your own shop if you know it well enough, otherwise the fictional org sticky (<i>Acme Analytics, 200 staff, two LLM copilots in production, no one owns AI security</i>). Read the six domain stickies once through.</td></tr><tr><td class="t">2</td><td><b>Score</b> all six domains 0, 1, or 2 in your notes file, in the order given: inventory, data controls, adversarial testing, layered defenses, governance, monitoring. The honesty rule: if you cannot point to the artifact (the list, the test report, the log), score the level below. One line per domain keeps you honest — e.g. <i>def-1: SSO everywhere, but both copilots share one service account, so one credential failure reaches everything.</i></td></tr><tr><td class="t">1</td><td><b>Pick</b> your FIRST: the single domain where one step of improvement would most improve your posture — not necessarily the lowest score. Add a comment on its sticky or write one line in your notes saying why, tied to risk or evidence: e.g. <i>FIRST: mon because we would learn about a misbehaving agent from a customer's incident call, not from our own dashboard.</i></td></tr><tr><td class="t">1</td><td><b>Post</b> your line in the Zoom chat in the exact format, and copy it into your notes under <code>DN7 BASELINE</code>: <code>SCORE: inv-# data-# adv-# def-# gov-# mon-# | FIRST: &lt;domain&gt; because &lt;reason&gt;</code>.</td></tr></tbody></table></div>
+<div class="dn-done"><p><b>Capture.</b> <code>SCORE: inv-# data-# adv-# def-# gov-# mon-# | FIRST: &lt;domain&gt; because &lt;reason&gt;</code></p><p><b>Done when.</b> Your line is in the Zoom chat with six 0-2 scores in the fixed order and exactly one FIRST domain with a reason tied to risk or evidence, and the same line is saved in your notes under <code>DN7 BASELINE</code> for Part 5.</p></div>
 <div class="dn-info"><p class="dn-info-title">In the news</p><p><b>Most organizations run AI agents with no policy to secure them.</b> SailPoint's 2025 survey of 353 IT professionals found that 82% of organizations already use AI agents, yet only 44% have policies in place to secure them. Nearly everyone sees the risk: 96% of respondents called AI agents a growing security threat, and 98% plan to expand their use anyway. So if your honest score today comes out low, you are statistically normal. That is precisely the problem this course is built to fix. Source: <a href="https://www.sailpoint.com/press-releases/sailpoint-ai-agent-adoption-report">SailPoint</a>.</p></div>
 <p class="dn-pattern"><b>Pattern.</b> <i>Evidence or it didn't happen:</i> a score you cannot back with an artifact is a wish, so score the level below. <b>Anti-pattern.</b> <i>Policy theater:</i> scoring 2 because a document exists that nobody follows, the same inflation the governance gate punishes in the lab.</p>
-<div class="dn-reading"><p class="dn-reading-title">Further reading</p><ul><li><a href="https://genai.owasp.org/">OWASP GenAI Security Project</a> (OWASP)</li><li><a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework</a> (NIST)</li><li><a href="https://www.sailpoint.com/press-releases/sailpoint-ai-agent-adoption-report">AI agent adoption and security survey (May 2025)</a> (SailPoint)</li></ul></div>
+<div class="dn-reading"><p class="dn-reading-title">Further reading</p><ul><li><b>Frameworks to score against</b><ul><li><a href="https://www.nist.gov/itl/ai-risk-management-framework">AI Risk Management Framework (NIST AI 100-1) and Generative AI Profile</a> (NIST)</li><li><a href="https://saif.google/">Secure AI Framework (SAIF): six core elements for securing AI systems</a> (Google)</li><li><a href="https://genai.owasp.org/">OWASP GenAI Security Project</a> (OWASP)</li></ul></li><li><b>Threat and control catalogs</b><ul><li><a href="https://atlas.mitre.org/">MITRE ATLAS: adversarial tactics and techniques against AI systems</a> (MITRE)</li><li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">OWASP Top 10 for LLM Applications</a> (OWASP)</li></ul></li><li><b>Incidents and surveys</b><ul><li><a href="https://www.sailpoint.com/press-releases/sailpoint-ai-agent-adoption-report">AI agent adoption and security survey (May 2025)</a> (SailPoint)</li><li><a href="https://thehackernews.com/2025/06/zero-click-ai-vulnerability-exposes.html">EchoLeak (CVE-2025-32711): what missing data controls and no pre-live adversarial testing look like in production</a> (The Hacker News)</li></ul></li></ul></div>
 <details class="dn-answer"><summary>Answer key</summary>
 <p class="eyebrow">Sample answer</p>
 <pre>SCORE: inv-1 data-1 adv-0 def-2 gov-1 mon-1 | FIRST: adv because both copilots went live with no prompt-injection testing and every other control assumes they behave
